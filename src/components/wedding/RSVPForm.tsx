@@ -94,7 +94,7 @@ const RSVPForm = () => {
   }
 
   return (
-    <section className="py-24 md:py-32 bg-card overflow-hidden">
+    <section className="py-14 md:py-24 bg-card overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -102,7 +102,7 @@ const RSVPForm = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16 md:mb-20"
+          className="text-center mb-10 md:mb-14"
         >
           <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">
             We Hope You Can Join Us
@@ -124,7 +124,7 @@ const RSVPForm = () => {
             initial={{ opacity: 0, x: -30 }}
             animate={isHeaderInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:block"
+            className="relative w-full max-w-[19rem] sm:max-w-sm lg:max-w-none mx-auto mb-10 lg:mb-0"
           >
             <div className="relative">
               <img
@@ -138,7 +138,7 @@ const RSVPForm = () => {
             </div>
             {/* Floating quote */}
             <motion.div 
-              className="absolute -bottom-8 -right-8 bg-background p-6 shadow-xl max-w-[250px] border-t-4 border-haldi"
+              className="absolute -bottom-8 -right-3 sm:-right-8 bg-background p-4 sm:p-6 shadow-xl max-w-[210px] sm:max-w-[250px] border-t-4 border-haldi"
               initial={{ opacity: 0, y: 20 }}
               animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}

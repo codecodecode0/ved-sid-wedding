@@ -2,8 +2,8 @@ import Navigation from "@/components/wedding/Navigation";
 import Hero from "@/components/wedding/Hero";
 import Marquee from "@/components/wedding/Marquee";
 import OurStory from "@/components/wedding/OurStory";
-import Gallery from "@/components/wedding/Gallery";
 
+import Venue from "@/components/wedding/Venue";
 import Countdown from "@/components/wedding/Countdown";
 import EventDetails from "@/components/wedding/EventDetails";
 import RSVPForm from "@/components/wedding/RSVPForm";
@@ -25,10 +25,6 @@ const Index = () => {
         <OurStory />
       </section>
 
-      <section id="moments">
-        <Gallery />
-      </section>
-      
       {/* Countdown Timer with Photo Background */}
       <Countdown />
       
@@ -42,6 +38,11 @@ const Index = () => {
         <RSVPForm />
       </section>
       
+      {/* Venue illustration and directions */}
+      <section id="venue">
+        <Venue />
+      </section>
+
       {/* Footer */}
       <Footer />
     </main>

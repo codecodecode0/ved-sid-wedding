@@ -24,7 +24,7 @@ const Countdown = () => {
   ];
 
   return (
-    <section ref={ref} className="relative py-32 md:py-40 overflow-hidden">
+    <section ref={ref} className="relative py-16 md:py-28 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -92,7 +92,7 @@ const Countdown = () => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="font-serif text-lg md:text-2xl italic text-on-photograph/80 mt-10"
+          className="font-serif text-lg md:text-2xl italic text-on-photograph/80 mt-6 md:mt-10"
         >
           {wedding.dates} • {wedding.location}
         </motion.p>
