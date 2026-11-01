@@ -28,7 +28,7 @@ export const wedding = {
   mapUrl: "https://share.google/DxVHqyg0djySK7CFR",
   address: "The Foresta Resort, Mulshi, Pune, Maharashtra, India",
   siteUrl: "https://codecodecode0.github.io/ved-sid-wedding/",
-  ceremonyAt: "2027-01-29T10:00:00+05:30",
+  ceremonyAt: "2027-01-29T09:00:00+05:30",
 };
 
 export const celebrationDays = [
@@ -44,7 +44,7 @@ export const celebrationDays = [
         image: engagementImage, imageAlt: "Gold engagement rings surrounded by jasmine and pink flowers",
       },
       {
-        title: "Haldi Carnival", marathiTitle: "हळदीचा सोहळा", time: "3:00 PM", durationMinutes: 150,
+        title: "Haldi Carnival", marathiTitle: "हळदीचा सोहळा", time: "2:00 PM", durationMinutes: 150,
         quote: "हळदीचा रंग, आनंदाची उधळण; हसत खेळत साजरा करू हा क्षण!",
         description: "An afternoon of turmeric, laughter and happy, playful chaos.",
         dressCode: "Pastel colours", attire: "Soft pastel sarees, kurtas or playful floral outfits in light fabrics, with comfortable flats; choose something you don’t mind getting a little haldi on.",
@@ -64,7 +64,7 @@ export const celebrationDays = [
     label: "Friday, January 29",
     events: [
       {
-        title: "Saptapadi", marathiTitle: "सप्तपदी", time: "10:00 AM", durationMinutes: 180,
+        title: "Saptapadi", marathiTitle: "सप्तपदी", time: "9:00 AM", durationMinutes: 180,
         quote: "सात पावले, सात वचने; जन्मभर जपू प्रेमाचे नाते.",
         description: "Seven sacred steps, seven promises, and the moment we become one.",
         dressCode: "Traditional Maharashtrian", attire: "Paithani or nauvari sarees, silk sarees, or kurta-pyjamas with a traditional jacket; a pheta makes a lovely finishing touch.",
