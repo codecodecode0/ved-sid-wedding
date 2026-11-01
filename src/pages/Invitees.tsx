@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { Download, Loader2, LockKeyhole, RefreshCw, Search } from "lucide-react";
+import { Download, Loader2, LockKeyhole, RefreshCw, Search, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { fetchGuestList, type Rsvp } from "@/lib/supabase";
+import { deleteGuest, fetchGuestList, type Rsvp } from "@/lib/supabase";
 import { LotusDivider } from "@/components/wedding/Motifs";
 
 const errorText = {
@@ -38,7 +38,15 @@ const Stat = ({ label, value }: { label: string; value: number }) => (
   </div>
 );
 
-const GuestTable = ({ rows }: { rows: Rsvp[] }) => (
+const GuestTable = ({
+  rows,
+  deletingId,
+  onDelete,
+}: {
+  rows: Rsvp[];
+  deletingId: string | null;
+  onDelete: (rsvp: Rsvp) => void;
+}) => (
   <div className="mt-5 max-h-[70svh] overflow-auto rounded-md border border-zari/40 bg-card">
     <table className="w-full min-w-[56rem] text-sm">
       <thead className="sticky top-0 z-20 bg-maroon text-on-photograph">
@@ -51,6 +59,7 @@ const GuestTable = ({ rows }: { rows: Rsvp[] }) => (
           <th className="px-3 py-2.5 font-medium">Dietary</th>
           <th className="px-3 py-2.5 font-medium">Message</th>
           <th className="px-3 py-2.5 font-medium">Responded</th>
+          <th className="px-3 py-2.5 font-medium"><span className="sr-only">Delete</span></th>
         </tr>
       </thead>
       <tbody>
@@ -74,6 +83,18 @@ const GuestTable = ({ rows }: { rows: Rsvp[] }) => (
               <td className="px-3 py-2.5 max-w-[12rem]">{r.dietary || "–"}</td>
               <td className="px-3 py-2.5 max-w-[18rem] text-foreground/80">{r.message || "–"}</td>
               <td className="px-3 py-2.5 whitespace-nowrap text-muted-foreground">{formatDate(r.created_at)}</td>
+              <td className="px-1.5 py-1.5">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => onDelete(r)}
+                  disabled={deletingId === r.id}
+                  aria-label={`Delete ${r.name}'s RSVP`}
+                  className="h-8 w-8 text-muted-foreground hover:text-destructive"
+                >
+                  {deletingId === r.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
+                </Button>
+              </td>
             </tr>
           );
         })}
@@ -90,6 +111,17 @@ const Invitees = () => {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "attending" | "not-attending">("all");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const remove = async (rsvp: Rsvp) => {
+    if (!window.confirm(`Delete ${rsvp.name}'s RSVP? This can't be undone.`)) return;
+    setDeletingId(rsvp.id);
+    setError(null);
+    const result = await deleteGuest(password, rsvp.id);
+    setDeletingId(null);
+    if ("deleted" in result) setRows((current) => current?.filter((r) => r.id !== rsvp.id) ?? null);
+    else setError(errorText[result.error]);
+  };
 
   // Keep this page out of search results.
   useEffect(() => {
@@ -203,7 +235,7 @@ const Invitees = () => {
         )}
 
         {shown.length ? (
-          <GuestTable rows={shown} />
+          <GuestTable rows={shown} deletingId={deletingId} onDelete={remove} />
         ) : (
           <p className="mt-10 text-center text-muted-foreground">{rows.length ? "No one matches that search." : "No responses yet."}</p>
         )}

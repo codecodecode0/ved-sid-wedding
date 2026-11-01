@@ -56,6 +56,40 @@ $$;
 revoke all on function public.get_rsvps(text) from public;
 grant execute on function public.get_rsvps(text) to anon;
 
+-- Deletes one RSVP for the right password. Same lockout as get_rsvps.
+create or replace function public.delete_rsvp(p_password text, p_id uuid)
+returns jsonb
+language plpgsql
+security definer
+set search_path = public, extensions, private
+as $$
+declare
+  recent_failures int;
+begin
+  select count(*) into recent_failures
+  from private.dashboard_attempts
+  where attempted_at > now() - interval '10 minutes';
+
+  if recent_failures >= 10 then
+    return jsonb_build_object('error', 'too_many_attempts');
+  end if;
+
+  if not exists (
+    select 1 from private.dashboard_secret
+    where password_hash = extensions.crypt(p_password, password_hash)
+  ) then
+    insert into private.dashboard_attempts default values;
+    return jsonb_build_object('error', 'wrong_password');
+  end if;
+
+  delete from public.rsvps where id = p_id;
+  return jsonb_build_object('deleted', found);
+end;
+$$;
+
+revoke all on function public.delete_rsvp(text, uuid) from public;
+grant execute on function public.delete_rsvp(text, uuid) to anon;
+
 -- Set or change the dashboard password:
 -- insert into private.dashboard_secret (id, password_hash)
 -- values (1, extensions.crypt('CHANGE-ME', extensions.gen_salt('bf')))

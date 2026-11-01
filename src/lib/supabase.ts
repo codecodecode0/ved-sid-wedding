@@ -36,3 +36,13 @@ export async function fetchGuestList(password: string): Promise<GuestListResult>
   if (error || !data) return { error: "unavailable" };
   return data as GuestListResult;
 }
+
+export type DeleteResult = { deleted: boolean } | { error: "wrong_password" | "too_many_attempts" | "unavailable" };
+
+/** Deletes one RSVP; the database checks the password first. */
+export async function deleteGuest(password: string, id: string): Promise<DeleteResult> {
+  if (!supabase) return { error: "unavailable" };
+  const { data, error } = await supabase.rpc("delete_rsvp", { p_password: password, p_id: id });
+  if (error || !data) return { error: "unavailable" };
+  return data as DeleteResult;
+}
