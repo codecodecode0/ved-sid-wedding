@@ -45,9 +45,9 @@ const EventDetails = () => (
                   </div>
                   <div className="pt-3 md:pt-0 flex flex-col flex-1">
                     <div className="border-t border-zari/30 md:border-border mt-auto md:mt-0 pt-2.5 md:pt-4">
-                      <p className="flex items-center gap-2 text-sm">
-                        <Shirt className="h-4 w-4 shrink-0 text-muted-foreground" />
-                        <span className="text-muted-foreground">Dress code:</span>
+                      <p className="text-sm">
+                        <Shirt className="inline h-4 w-4 mr-1.5 -mt-0.5 text-muted-foreground" />
+                        <span className="text-muted-foreground">Dress code: </span>
                         <span className="font-medium">{event.dressCode}</span>
                       </p>
                       <p className="text-xs leading-5 text-muted-foreground mt-1.5">{event.attire}</p>
