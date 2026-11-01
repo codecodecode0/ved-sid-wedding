@@ -57,7 +57,6 @@ const RSVPForm = () => {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedAttending, setSubmittedAttending] = useState(false);
-  const [submittedEmail, setSubmittedEmail] = useState("");
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<FormData>({
@@ -93,7 +92,6 @@ const RSVPForm = () => {
       return;
     }
     setSubmittedAttending(attending);
-    setSubmittedEmail(data.email);
     setIsSubmitted(true);
   };
 
@@ -132,11 +130,6 @@ const RSVPForm = () => {
             </p>
             {submittedAttending && (
               <div className="mt-8">
-                {submittedEmail && (
-                  <p className="text-sm text-muted-foreground mb-4">
-                    A calendar invite is on its way to <span className="text-foreground">{submittedEmail}</span>.
-                  </p>
-                )}
                 <p className="text-sm text-muted-foreground mb-3">Save the dates so you don't miss a moment:</p>
                 <AddToCalendar />
               </div>
@@ -251,7 +244,6 @@ const RSVPForm = () => {
                           {...field}
                         />
                       </FormControl>
-                      <p className="text-xs text-muted-foreground">Add your email to receive a calendar invite.</p>
                       <FormMessage />
                     </FormItem>
                   )}

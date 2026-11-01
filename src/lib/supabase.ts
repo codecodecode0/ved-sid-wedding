@@ -24,3 +24,15 @@ export async function saveRsvp(row: RsvpRow) {
   const { error } = await supabase.from("rsvps").insert(row);
   if (error) throw error;
 }
+
+export type Rsvp = RsvpRow & { id: string; created_at: string };
+
+export type GuestListResult = { rows: Rsvp[] } | { error: "wrong_password" | "too_many_attempts" | "unavailable" };
+
+/** The database checks the password and only then returns every RSVP. */
+export async function fetchGuestList(password: string): Promise<GuestListResult> {
+  if (!supabase) return { error: "unavailable" };
+  const { data, error } = await supabase.rpc("get_rsvps", { p_password: password });
+  if (error || !data) return { error: "unavailable" };
+  return data as GuestListResult;
+}
