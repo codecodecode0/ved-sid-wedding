@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type FormEvent } from "react";
-import { Download, Loader2, LockKeyhole, Mail, MessageSquareHeart, Phone, RefreshCw, Search, Utensils } from "lucide-react";
+import { Download, Loader2, LockKeyhole, RefreshCw, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { fetchGuestList, type Rsvp } from "@/lib/supabase";
@@ -32,58 +32,55 @@ function downloadCsv(rows: Rsvp[]) {
 }
 
 const Stat = ({ label, value }: { label: string; value: number }) => (
-  <div className="rounded-md border border-zari/40 bg-card px-3 py-3 text-center">
-    <p className="font-serif text-3xl leading-none">{value}</p>
-    <p className="mt-1.5 text-[0.65rem] tracking-[0.15em] uppercase text-muted-foreground">{label}</p>
+  <div className="rounded-md border border-zari/40 bg-card px-1.5 py-2.5 sm:px-3 sm:py-3 text-center">
+    <p className="font-serif text-2xl sm:text-3xl leading-none">{value}</p>
+    <p className="mt-1.5 text-[0.55rem] sm:text-[0.65rem] tracking-[0.1em] sm:tracking-[0.15em] uppercase text-muted-foreground">{label}</p>
   </div>
 );
 
-const GuestCard = ({ rsvp }: { rsvp: Rsvp }) => {
-  const attending = rsvp.attendance === "attending";
-  return (
-    <li className="rounded-md border border-zari/40 bg-card p-4 shadow-[0_8px_24px_-18px_hsl(var(--maroon-deep)/0.5)]">
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="font-serif text-xl leading-tight break-words">{rsvp.name}</p>
-          <p className="mt-1 text-xs text-muted-foreground">{formatDate(rsvp.created_at)}</p>
-        </div>
-        <span
-          className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${
-            attending ? "bg-paithani/10 text-paithani" : "bg-muted text-muted-foreground"
-          }`}
-        >
-          {attending ? `Attending · ${headcount(rsvp)}` : "Declined"}
-        </span>
-      </div>
-      <div className="mt-3 space-y-1.5 text-sm">
-        {rsvp.phone && (
-          <a href={`tel:${rsvp.phone.replace(/\s/g, "")}`} className="flex items-center gap-2 hover:text-rose-foreground">
-            <Phone className="h-4 w-4 shrink-0 text-muted-foreground" />
-            {rsvp.phone}
-          </a>
-        )}
-        {rsvp.email && (
-          <a href={`mailto:${rsvp.email}`} className="flex items-center gap-2 break-all hover:text-rose-foreground">
-            <Mail className="h-4 w-4 shrink-0 text-muted-foreground" />
-            {rsvp.email}
-          </a>
-        )}
-        {rsvp.dietary && (
-          <p className="flex items-start gap-2">
-            <Utensils className="h-4 w-4 mt-0.5 shrink-0 text-muted-foreground" />
-            {rsvp.dietary}
-          </p>
-        )}
-        {rsvp.message && (
-          <p className="flex items-start gap-2 italic text-foreground/80">
-            <MessageSquareHeart className="h-4 w-4 mt-0.5 shrink-0 text-muted-foreground not-italic" />
-            {rsvp.message}
-          </p>
-        )}
-      </div>
-    </li>
-  );
-};
+const GuestTable = ({ rows }: { rows: Rsvp[] }) => (
+  <div className="mt-5 max-h-[70svh] overflow-auto rounded-md border border-zari/40 bg-card">
+    <table className="w-full min-w-[56rem] text-sm">
+      <thead className="sticky top-0 z-20 bg-maroon text-on-photograph">
+        <tr className="text-left text-xs tracking-[0.1em] uppercase">
+          <th className="sticky left-0 z-10 bg-maroon px-3 py-2.5 font-medium">Name</th>
+          <th className="px-3 py-2.5 font-medium">Response</th>
+          <th className="px-3 py-2.5 font-medium text-right">Guests</th>
+          <th className="px-3 py-2.5 font-medium">Phone</th>
+          <th className="px-3 py-2.5 font-medium">Email</th>
+          <th className="px-3 py-2.5 font-medium">Dietary</th>
+          <th className="px-3 py-2.5 font-medium">Message</th>
+          <th className="px-3 py-2.5 font-medium">Responded</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((r) => {
+          const attending = r.attendance === "attending";
+          return (
+            <tr key={r.id} className="border-t border-zari/20 align-top odd:bg-background even:bg-card">
+              <td className="sticky left-0 bg-inherit px-3 py-2.5 font-medium max-w-[11rem] break-words">{r.name}</td>
+              <td className="px-3 py-2.5 whitespace-nowrap">
+                <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${attending ? "bg-paithani/10 text-paithani" : "bg-muted text-muted-foreground"}`}>
+                  {attending ? "Attending" : "Declined"}
+                </span>
+              </td>
+              <td className="px-3 py-2.5 text-right tabular-nums">{attending ? headcount(r) : "–"}</td>
+              <td className="px-3 py-2.5 whitespace-nowrap">
+                {r.phone ? <a href={`tel:${r.phone.replace(/\s/g, "")}`} className="hover:text-rose-foreground">{r.phone}</a> : "–"}
+              </td>
+              <td className="px-3 py-2.5 break-all">
+                {r.email ? <a href={`mailto:${r.email}`} className="hover:text-rose-foreground">{r.email}</a> : "–"}
+              </td>
+              <td className="px-3 py-2.5 max-w-[12rem]">{r.dietary || "–"}</td>
+              <td className="px-3 py-2.5 max-w-[18rem] text-foreground/80">{r.message || "–"}</td>
+              <td className="px-3 py-2.5 whitespace-nowrap text-muted-foreground">{formatDate(r.created_at)}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+);
 
 /** Password-protected guest list. The password is checked by the database, never in this code. */
 const Invitees = () => {
@@ -167,8 +164,8 @@ const Invitees = () => {
         </p>
       </header>
 
-      <div className="mx-auto max-w-3xl px-4 py-6">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+      <div className="mx-auto max-w-6xl px-4 py-6">
+        <div className="grid grid-cols-4 gap-2">
           <Stat label="Responses" value={rows.length} />
           <Stat label="Attending" value={attending.length} />
           <Stat label="Total guests" value={attending.reduce((sum, r) => sum + headcount(r), 0)} />
@@ -206,11 +203,7 @@ const Invitees = () => {
         )}
 
         {shown.length ? (
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-            {shown.map((r) => (
-              <GuestCard key={r.id} rsvp={r} />
-            ))}
-          </ul>
+          <GuestTable rows={shown} />
         ) : (
           <p className="mt-10 text-center text-muted-foreground">{rows.length ? "No one matches that search." : "No responses yet."}</p>
         )}
