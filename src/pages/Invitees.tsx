@@ -292,7 +292,8 @@ const Invitees = () => {
                 Delete {selected.size === 1 ? "this RSVP" : `these ${selected.size} RSVPs`}?
               </AlertDialogTitle>
               <AlertDialogDescription>
-                {(rows ?? []).filter((r) => selected.has(r.id)).map((r) => r.name).join(", ")}. This can't be undone.
+                {(rows ?? []).filter((r) => selected.has(r.id)).map((r) => r.name).join(", ")} will be removed from this list. The
+                record is kept in Supabase, so it can be restored there.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

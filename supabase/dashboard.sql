@@ -48,7 +48,7 @@ begin
 
   return jsonb_build_object(
     'rows',
-    coalesce((select jsonb_agg(to_jsonb(r) order by r.created_at desc) from public.rsvps r), '[]'::jsonb)
+    coalesce((select jsonb_agg(to_jsonb(r) order by r.created_at desc) from public.rsvps r where r.deleted_at is null), '[]'::jsonb)
   );
 end;
 $$;
@@ -56,7 +56,8 @@ $$;
 revoke all on function public.get_rsvps(text) from public;
 grant execute on function public.get_rsvps(text) to anon;
 
--- Deletes one RSVP for the right password. Same lockout as get_rsvps.
+-- Soft-deletes one RSVP for the right password. Same lockout as get_rsvps.
+-- To restore one: Table Editor → rsvps → clear its deleted_at.
 create or replace function public.delete_rsvp(p_password text, p_id uuid)
 returns jsonb
 language plpgsql
@@ -82,7 +83,8 @@ begin
     return jsonb_build_object('error', 'wrong_password');
   end if;
 
-  delete from public.rsvps where id = p_id;
+  -- Soft delete: keep the row, hide it from the guest list
+  update public.rsvps set deleted_at = now() where id = p_id and deleted_at is null;
   return jsonb_build_object('deleted', found);
 end;
 $$;

@@ -25,7 +25,7 @@ export async function saveRsvp(row: RsvpRow) {
   if (error) throw error;
 }
 
-export type Rsvp = RsvpRow & { id: string; created_at: string };
+export type Rsvp = RsvpRow & { id: string; created_at: string; deleted_at: string | null };
 
 export type GuestListResult = { rows: Rsvp[] } | { error: "wrong_password" | "too_many_attempts" | "unavailable" };
 
@@ -39,7 +39,7 @@ export async function fetchGuestList(password: string): Promise<GuestListResult>
 
 export type DeleteResult = { deleted: boolean } | { error: "wrong_password" | "too_many_attempts" | "unavailable" };
 
-/** Deletes one RSVP; the database checks the password first. */
+/** Soft-deletes one RSVP (hides it from the list); the database checks the password first. */
 export async function deleteGuest(password: string, id: string): Promise<DeleteResult> {
   if (!supabase) return { error: "unavailable" };
   const { data, error } = await supabase.rpc("delete_rsvp", { p_password: password, p_id: id });
