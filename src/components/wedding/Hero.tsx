@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 import { photos, wedding } from "@/lib/wedding";
 import { LotusDivider, PaithaniBorder, Toran } from "./Motifs";
+import AddToCalendar from "./AddToCalendar";
 
 const fade = (delay: number) => ({
   initial: { opacity: 0, y: 16 },
@@ -62,6 +63,9 @@ const Hero = () => (
               <MapPin className="h-3.5 w-3.5 text-zari/80 shrink-0" />
               {wedding.venue} • {wedding.location}
             </a>
+            <div className="mt-6">
+              <AddToCalendar className="border-zari/70 bg-transparent text-zari hover:bg-zari/15 hover:text-zari" />
+            </div>
           </motion.div>
         </div>
 
