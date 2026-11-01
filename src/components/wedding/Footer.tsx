@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { wedding } from "@/lib/wedding";
 import { LotusDivider, PaithaniBorder } from "./Motifs";
+import Venue from "./Venue";
 
 const footerVariants = {
   hidden: { opacity: 0 },
@@ -25,9 +26,12 @@ const itemVariants = {
 
 const Footer = () => {
   return (
-    <footer className="rangoli-texture text-on-photograph">
+    <footer id="venue" className="rangoli-texture text-on-photograph scroll-mt-16">
       <PaithaniBorder />
-      <div className="container mx-auto px-6 py-16 md:py-24">
+      <div className="container mx-auto px-6 py-14 md:py-20">
+        <Venue />
+        <LotusDivider light className="my-10" />
+
         {/* Monogram */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -66,20 +70,9 @@ const Footer = () => {
           >
             {wedding.dates}
           </motion.p>
-          <motion.p 
-            className="text-sm tracking-[0.2em] uppercase text-on-photograph/60"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {wedding.venue} • {wedding.location}
-          </motion.p>
-
-          <LotusDivider light className="my-8" />
 
           <motion.p 
-            className="text-sm text-on-photograph/60"
+            className="mt-6 text-sm text-on-photograph/60"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
