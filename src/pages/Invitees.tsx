@@ -40,18 +40,31 @@ const Stat = ({ label, value }: { label: string; value: number }) => (
 
 const GuestTable = ({
   rows,
-  deletingId,
-  onDelete,
+  selected,
+  onToggle,
+  onToggleAll,
 }: {
   rows: Rsvp[];
-  deletingId: string | null;
-  onDelete: (rsvp: Rsvp) => void;
+  selected: Set<string>;
+  onToggle: (id: string) => void;
+  onToggleAll: () => void;
 }) => (
   <div className="mt-5 max-h-[70svh] overflow-auto rounded-md border border-zari/40 bg-card">
     <table className="w-full min-w-[56rem] text-sm">
       <thead className="sticky top-0 z-20 bg-maroon text-on-photograph">
         <tr className="text-left text-xs tracking-[0.1em] uppercase">
-          <th className="sticky left-0 z-10 bg-maroon px-3 py-2.5 font-medium">Name</th>
+          <th className="sticky left-0 z-10 bg-maroon px-3 py-2.5 font-medium">
+            <label className="flex items-center gap-3">
+              <input
+                type="checkbox"
+                aria-label="Select all"
+                checked={rows.length > 0 && rows.every((r) => selected.has(r.id))}
+                onChange={onToggleAll}
+                className="h-4 w-4 accent-zari"
+              />
+              Name
+            </label>
+          </th>
           <th className="px-3 py-2.5 font-medium">Response</th>
           <th className="px-3 py-2.5 font-medium text-right">Guests</th>
           <th className="px-3 py-2.5 font-medium">Phone</th>
@@ -59,15 +72,28 @@ const GuestTable = ({
           <th className="px-3 py-2.5 font-medium">Dietary</th>
           <th className="px-3 py-2.5 font-medium">Message</th>
           <th className="px-3 py-2.5 font-medium">Responded</th>
-          <th className="px-3 py-2.5 font-medium"><span className="sr-only">Delete</span></th>
         </tr>
       </thead>
       <tbody>
         {rows.map((r) => {
           const attending = r.attendance === "attending";
           return (
-            <tr key={r.id} className="border-t border-zari/20 align-top odd:bg-background even:bg-card">
-              <td className="sticky left-0 bg-inherit px-3 py-2.5 font-medium max-w-[11rem] break-words">{r.name}</td>
+            <tr
+              key={r.id}
+              className={`border-t border-zari/20 align-top ${selected.has(r.id) ? "bg-haldi/15" : "odd:bg-background even:bg-card"}`}
+            >
+              <td className="sticky left-0 bg-inherit px-3 py-2.5 font-medium max-w-[13rem]">
+                <label className="flex items-start gap-3 break-words">
+                  <input
+                    type="checkbox"
+                    aria-label={`Select ${r.name}`}
+                    checked={selected.has(r.id)}
+                    onChange={() => onToggle(r.id)}
+                    className="mt-0.5 h-4 w-4 shrink-0 accent-maroon"
+                  />
+                  {r.name}
+                </label>
+              </td>
               <td className="px-3 py-2.5 whitespace-nowrap">
                 <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${attending ? "bg-paithani/10 text-paithani" : "bg-muted text-muted-foreground"}`}>
                   {attending ? "Attending" : "Declined"}
@@ -83,18 +109,6 @@ const GuestTable = ({
               <td className="px-3 py-2.5 max-w-[12rem]">{r.dietary || "–"}</td>
               <td className="px-3 py-2.5 max-w-[18rem] text-foreground/80">{r.message || "–"}</td>
               <td className="px-3 py-2.5 whitespace-nowrap text-muted-foreground">{formatDate(r.created_at)}</td>
-              <td className="px-1.5 py-1.5">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => onDelete(r)}
-                  disabled={deletingId === r.id}
-                  aria-label={`Delete ${r.name}'s RSVP`}
-                  className="h-8 w-8 text-muted-foreground hover:text-destructive"
-                >
-                  {deletingId === r.id ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
-                </Button>
-              </td>
             </tr>
           );
         })}
@@ -111,16 +125,35 @@ const Invitees = () => {
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<"all" | "attending" | "not-attending">("all");
-  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [selected, setSelected] = useState<Set<string>>(new Set());
+  const [deleting, setDeleting] = useState(false);
 
-  const remove = async (rsvp: Rsvp) => {
-    if (!window.confirm(`Delete ${rsvp.name}'s RSVP? This can't be undone.`)) return;
-    setDeletingId(rsvp.id);
+  const toggle = (id: string) =>
+    setSelected((current) => {
+      const next = new Set(current);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+
+  const removeSelected = async () => {
+    const ids = [...selected];
+    const label = ids.length === 1 ? "this RSVP" : `these ${ids.length} RSVPs`;
+    if (!window.confirm(`Delete ${label}? This can't be undone.`)) return;
+    setDeleting(true);
     setError(null);
-    const result = await deleteGuest(password, rsvp.id);
-    setDeletingId(null);
-    if ("deleted" in result) setRows((current) => current?.filter((r) => r.id !== rsvp.id) ?? null);
-    else setError(errorText[result.error]);
+    const deleted = new Set<string>();
+    for (const id of ids) {
+      const result = await deleteGuest(password, id);
+      if (!("deleted" in result)) {
+        setError(errorText[result.error]);
+        break;
+      }
+      deleted.add(id);
+    }
+    setDeleting(false);
+    setRows((current) => current?.filter((r) => !deleted.has(r.id)) ?? null);
+    setSelected((current) => new Set([...current].filter((id) => !deleted.has(id))));
   };
 
   // Keep this page out of search results.
@@ -228,6 +261,20 @@ const Invitees = () => {
             </Button>
           </div>
         </div>
+        {selected.size > 0 && (
+          <div className="mt-4 flex items-center justify-between gap-3 rounded-md border border-destructive/30 bg-destructive/5 px-3 py-2">
+            <p className="text-sm">
+              {selected.size} selected
+              <button type="button" onClick={() => setSelected(new Set())} className="ml-3 text-muted-foreground underline underline-offset-2">
+                Clear
+              </button>
+            </p>
+            <Button size="sm" variant="destructive" onClick={removeSelected} disabled={deleting} className="gap-2">
+              {deleting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
+              Delete selected
+            </Button>
+          </div>
+        )}
         {error && (
           <p role="alert" className="mt-3 text-sm text-destructive">
             {error}
@@ -235,7 +282,14 @@ const Invitees = () => {
         )}
 
         {shown.length ? (
-          <GuestTable rows={shown} deletingId={deletingId} onDelete={remove} />
+          <GuestTable
+            rows={shown}
+            selected={selected}
+            onToggle={toggle}
+            onToggleAll={() =>
+              setSelected((current) => (shown.every((r) => current.has(r.id)) ? new Set() : new Set(shown.map((r) => r.id))))
+            }
+          />
         ) : (
           <p className="mt-10 text-center text-muted-foreground">{rows.length ? "No one matches that search." : "No responses yet."}</p>
         )}
