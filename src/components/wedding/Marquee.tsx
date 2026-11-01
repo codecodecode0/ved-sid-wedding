@@ -19,8 +19,8 @@ const Marquee = () => {
           {[...Array(8)].map((_, i) => (
             <span key={i} className="flex items-center">
               {items.map((item) => (
-                <span key={item} className="flex items-center">
-                  <span lang={isMarathi(item) ? "mr" : undefined} className={`text-rose-foreground mx-5 ${isMarathi(item) ? "text-base" : "text-sm tracking-[0.25em] uppercase"}`}>
+                <span key={item} className="flex items-center whitespace-nowrap">
+                  <span lang={isMarathi(item) ? "mr" : undefined} className={`text-rose-foreground mx-5 ${isMarathi(item) ? "text-base [text-wrap:nowrap]" : "text-sm tracking-[0.25em] uppercase"}`}>
                     {item}
                   </span>
                   <span className="text-haldi">✦</span>
@@ -33,8 +33,8 @@ const Marquee = () => {
           {[...Array(8)].map((_, i) => (
             <span key={i} className="flex items-center">
               {items.map((item) => (
-                <span key={item} className="flex items-center">
-                  <span lang={isMarathi(item) ? "mr" : undefined} className={`text-rose-foreground mx-5 ${isMarathi(item) ? "text-base" : "text-sm tracking-[0.25em] uppercase"}`}>
+                <span key={item} className="flex items-center whitespace-nowrap">
+                  <span lang={isMarathi(item) ? "mr" : undefined} className={`text-rose-foreground mx-5 ${isMarathi(item) ? "text-base [text-wrap:nowrap]" : "text-sm tracking-[0.25em] uppercase"}`}>
                     {item}
                   </span>
                   <span className="text-haldi">✦</span>
