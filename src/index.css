@@ -18,48 +18,50 @@
 
 
 @layer base {
-  :root {
-    /* Off-white / Light Sand Background */
-    --background: 40 33% 96%;
-    --foreground: 30 10% 15%;
+    :root {
+    /* Marathi wedding palette: ivory, kumkum maroon, haldi gold, paithani green */
+    --background: 40 45% 96%;
+    --foreground: 350 30% 14%;
 
-    /* Card colors - warm cream */
-    --card: 40 30% 98%;
-    --card-foreground: 30 10% 15%;
+    --card: 38 50% 93%;
+    --card-foreground: 350 30% 14%;
 
-    --popover: 40 30% 98%;
-    --popover-foreground: 30 10% 15%;
+    --popover: 40 45% 97%;
+    --popover-foreground: 350 30% 14%;
 
-    /* Primary - Soft black / dark charcoal */
-    --primary: 30 10% 15%;
-    --primary-foreground: 40 33% 96%;
+    /* Kumkum maroon */
+    --primary: 350 62% 27%;
+    --primary-foreground: 40 60% 95%;
 
-    /* Secondary - Muted warm tones */
-    --secondary: 35 25% 92%;
-    --secondary-foreground: 30 10% 20%;
+    --secondary: 38 45% 89%;
+    --secondary-foreground: 350 30% 18%;
 
-    /* Muted - Subtle warm gray */
-    --muted: 35 20% 90%;
-    --muted-foreground: 30 8% 45%;
+    --muted: 38 35% 88%;
+    --muted-foreground: 350 12% 38%;
 
-    /* Accent - Muted blush / dusty rose */
-    --accent: 10 30% 85%;
-    --accent-foreground: 30 10% 15%;
+    /* Haldi / marigold */
+    --accent: 40 85% 88%;
+    --accent-foreground: 350 30% 14%;
 
-    /* Blush highlight for special elements */
-    --blush: 10 35% 80%;
-    --blush-foreground: 10 25% 30%;
+    --blush: 40 80% 85%;
+    --blush-foreground: 350 45% 25%;
 
-    /* Rose gold for subtle accents */
-    --rose: 15 40% 75%;
-    --rose-foreground: 15 30% 25%;
+    /* "rose" tokens now carry the gold-and-maroon accent */
+    --rose: 40 78% 52%;
+    --rose-foreground: 350 55% 32%;
 
-    --destructive: 0 60% 50%;
+    --maroon: 350 62% 24%;
+    --maroon-deep: 350 55% 15%;
+    --haldi: 40 82% 54%;
+    --zari: 42 70% 64%;
+    --paithani: 160 45% 22%;
+
+    --destructive: 0 60% 45%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 20% 88%;
-    --input: 35 20% 88%;
-    --ring: 10 30% 70%;
+    --border: 38 35% 82%;
+    --input: 38 35% 80%;
+    --ring: 40 78% 52%;
 
     --radius: 0.25rem;
 
@@ -67,17 +69,17 @@
     --font-serif: 'Playfair Display', Georgia, serif;
     --font-sans: 'Inter', system-ui, sans-serif;
     --font-marathi: 'Wedding Devanagari', Georgia, serif;
-    --photograph-overlay: 30 10% 8%;
-    --on-photograph: 40 33% 96%;
+    --photograph-overlay: 350 55% 10%;
+    --on-photograph: 40 60% 96%;
 
-    --sidebar-background: 40 30% 97%;
-    --sidebar-foreground: 30 10% 20%;
-    --sidebar-primary: 30 10% 15%;
-    --sidebar-primary-foreground: 40 33% 96%;
-    --sidebar-accent: 35 25% 92%;
-    --sidebar-accent-foreground: 30 10% 20%;
-    --sidebar-border: 35 20% 88%;
-    --sidebar-ring: 10 30% 70%;
+    --sidebar-background: 40 45% 96%;
+    --sidebar-foreground: 350 30% 18%;
+    --sidebar-primary: 350 62% 27%;
+    --sidebar-primary-foreground: 40 60% 95%;
+    --sidebar-accent: 38 45% 89%;
+    --sidebar-accent-foreground: 350 30% 18%;
+    --sidebar-border: 38 35% 82%;
+    --sidebar-ring: 40 78% 52%;
   }
 
   .dark {
@@ -183,7 +185,35 @@
 
   /* Editorial divider */
   .divider-editorial {
-    @apply w-16 h-px bg-border mx-auto;
+    @apply w-16 h-px mx-auto;
+    background: linear-gradient(90deg, transparent, hsl(var(--haldi)), transparent);
+  }
+
+  /* Paithani-inspired zari border: gold kangoora triangles on maroon */
+  .paithani-border {
+    height: 14px;
+    background-color: hsl(var(--maroon));
+    background-image:
+      linear-gradient(135deg, hsl(var(--zari)) 25%, transparent 25%),
+      linear-gradient(225deg, hsl(var(--zari)) 25%, transparent 25%);
+    background-size: 14px 14px;
+    background-position: 0 0, 0 0;
+    border-top: 2px solid hsl(var(--zari));
+    border-bottom: 2px solid hsl(var(--paithani));
+  }
+
+  /* Subtle rangoli-dot texture for maroon surfaces */
+  .rangoli-texture {
+    background-color: hsl(var(--maroon));
+    background-image:
+      radial-gradient(circle at 1px 1px, hsl(var(--zari) / 0.18) 1px, transparent 0),
+      radial-gradient(ellipse at top, hsl(var(--maroon-deep) / 0) 0%, hsl(var(--maroon-deep) / 0.7) 100%);
+    background-size: 22px 22px, 100% 100%;
+  }
+
+  /* Temple-arch (kamaan) photo frame */
+  .arch-frame {
+    border-radius: 999px 999px 0.25rem 0.25rem;
   }
 
   /* Blush accent background */

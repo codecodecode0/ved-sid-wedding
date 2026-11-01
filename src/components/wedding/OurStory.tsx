@@ -2,14 +2,9 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { storyMilestones } from "@/lib/wedding";
+import { LotusDivider } from "./Motifs";
 
-const storyImages = [
-  "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=600&q=80",
-  "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=600&q=80",
-  "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=600&q=80",
-  "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-];
-const timelineEvents = storyMilestones.map((event, index) => ({ ...event, image: storyImages[index] }));
+const timelineEvents = storyMilestones;
 
 const TimelineItem = ({
   event,
@@ -36,32 +31,33 @@ const TimelineItem = ({
     >
       {/* Image */}
       <motion.div 
-        className="w-full md:w-1/2 relative group"
+        className="w-full max-w-sm md:max-w-none md:w-5/12 relative group"
         whileHover={{ scale: 1.02 }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         <div className="relative overflow-hidden">
           <img
             src={event.image}
-            alt={event.title}
-            className="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105"
+            alt={event.imageAlt}
+            loading="lazy"
+            className="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          {/* Decorative border */}
-          <div className="absolute inset-0 border border-rose/20 m-4 pointer-events-none" />
+          {/* Decorative zari border */}
+          <div className="absolute inset-0 border border-zari/70 m-4 pointer-events-none" />
         </div>
         {/* Year badge */}
         <motion.div 
-          className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-background px-6 py-2 border border-border shadow-lg"
+          className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-background px-6 py-2 border border-zari shadow-lg whitespace-nowrap"
           initial={{ opacity: 0, y: 10 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
         >
-          <span className="font-serif text-2xl text-rose">{event.year}</span>
+          <span className="font-serif text-2xl text-rose-foreground">{event.year}</span>
         </motion.div>
       </motion.div>
 
       {/* Content */}
-      <div className={`w-full md:w-1/2 text-center md:text-left ${isEven ? "" : "md:text-right"} pt-8 md:pt-0`}>
+      <div className={`w-full md:w-7/12 text-center md:text-left ${isEven ? "" : "md:text-right"} pt-8 md:pt-0`}>
         <motion.h3 
           className="font-serif text-2xl md:text-3xl mb-4"
           initial={{ opacity: 0 }}
@@ -70,6 +66,7 @@ const TimelineItem = ({
         >
           {event.title}
         </motion.h3>
+        <p lang="mr" className="text-lg md:text-xl text-rose-foreground">{event.marathiLine}</p>
 
       </div>
     </motion.div>
@@ -98,7 +95,7 @@ const OurStory = () => {
             Our Story
           </h2>
           <p lang="mr" className="text-lg md:text-xl text-rose-foreground mt-3">दोन मनांची गाठ, आयुष्यभराची साथ.</p>
-          <div className="divider-editorial mt-7" />
+          <LotusDivider className="mt-7" />
         </motion.div>
 
         {/* Timeline with Photos */}

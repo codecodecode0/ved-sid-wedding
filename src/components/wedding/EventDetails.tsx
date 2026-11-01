@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { MapPin, ArrowUpRight, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { celebrationDays, wedding } from "@/lib/wedding";
+import { LotusDivider } from "./Motifs";
 
 const EventDetails = () => (
   <section className="py-24 md:py-32">
@@ -10,7 +11,7 @@ const EventDetails = () => (
         <p className="text-xs uppercase text-muted-foreground mb-4">Two days of love & celebration</p>
         <h2 className="heading-elegant font-serif text-4xl md:text-5xl lg:text-6xl">Event Details</h2>
         <p lang="mr" className="text-lg md:text-xl text-rose-foreground mt-3">परंपरेचा साज, प्रेमाचा सोहळा.</p>
-        <div className="divider-editorial my-7" />
+        <LotusDivider className="my-7" />
         <p className="font-serif text-2xl md:text-3xl">{wedding.dates}</p>
         <p className="text-sm text-muted-foreground mt-4">{wedding.venue} · {wedding.location}</p>
         <Button asChild variant="ghost" className="mt-3 gap-2">

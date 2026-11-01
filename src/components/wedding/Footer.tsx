@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { wedding } from "@/lib/wedding";
+import { LotusDivider, PaithaniBorder } from "./Motifs";
 
 const footerVariants = {
   hidden: { opacity: 0 },
@@ -24,8 +25,9 @@ const itemVariants = {
 
 const Footer = () => {
   return (
-    <footer className="py-16 md:py-24 bg-foreground text-background">
-      <div className="container mx-auto px-6">
+    <footer className="rangoli-texture text-on-photograph">
+      <PaithaniBorder />
+      <div className="container mx-auto px-6 py-16 md:py-24">
         {/* Monogram */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -34,7 +36,8 @@ const Footer = () => {
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <div className="inline-flex items-center gap-4 mb-8">
+          <p lang="mr" className="text-2xl md:text-3xl text-haldi mb-6">शुभमंगल सावधान</p>
+          <div className="inline-flex items-center gap-4 mb-4">
             <span className="font-serif text-4xl md:text-5xl">V</span>
             <motion.div
               animate={{ 
@@ -46,11 +49,14 @@ const Footer = () => {
                 ease: "easeInOut"
               }}
             >
-              <Heart className="w-5 h-5 text-rose" />
+              <Heart className="w-5 h-5 text-haldi" fill="currentColor" />
             </motion.div>
             <span className="font-serif text-4xl md:text-5xl">S</span>
           </div>
 
+          <p lang="mr" className="text-lg text-on-photograph/80 mb-6">
+            {wedding.marathiNames.bride} ❀ {wedding.marathiNames.groom}
+          </p>
           <motion.p 
             className="font-serif text-xl md:text-2xl italic mb-2"
             initial={{ opacity: 0, y: 10 }}
@@ -61,7 +67,7 @@ const Footer = () => {
             {wedding.dates}
           </motion.p>
           <motion.p 
-            className="text-sm tracking-[0.2em] uppercase text-background/60"
+            className="text-sm tracking-[0.2em] uppercase text-on-photograph/60"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -70,16 +76,10 @@ const Footer = () => {
             {wedding.venue} • {wedding.location}
           </motion.p>
 
-          <motion.div 
-            className="w-16 h-px bg-background/20 mx-auto my-8"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          />
+          <LotusDivider light className="my-8" />
 
           <motion.p 
-            className="text-sm text-background/50"
+            className="text-sm text-on-photograph/60"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}

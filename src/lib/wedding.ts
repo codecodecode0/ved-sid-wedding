@@ -4,9 +4,23 @@ import sangeetImage from "@/assets/sangeet-modern.jpg";
 import saptapadiImage from "@/assets/event-saptapadi.jpg";
 import baaratImage from "@/assets/baarat-celebration-details.jpg";
 import receptionImage from "@/assets/event-reception.jpg";
+import heroRing from "@/assets/photos/hero-ring.jpg";
+import firstGlanceImage from "@/assets/photos/story-first-glance.jpg";
+import adventuresImage from "@/assets/photos/story-adventures.jpg";
+import proposalImage from "@/assets/photos/story-proposal.jpg";
+import familiesImage from "@/assets/photos/story-families.jpg";
+import countdownImage from "@/assets/photos/countdown-chicago.jpg";
+import rsvpImage from "@/assets/photos/rsvp-couple.jpg";
+import bridgeImage from "@/assets/photos/gallery-bridge.jpg";
+import embraceImage from "@/assets/photos/gallery-embrace.jpg";
+import pointingImage from "@/assets/photos/gallery-pointing.jpg";
+import boatAboveImage from "@/assets/photos/gallery-boat-above.jpg";
+import boatImage from "@/assets/photos/gallery-boat.jpg";
+import timesSquareImage from "@/assets/photos/gallery-times-square.jpg";
 
 export const wedding = {
   names: "Vedangi & Siddhant",
+  marathiNames: { bride: "वेदांगी", groom: "सिद्धांत" },
   dates: "January 28–29, 2027",
   venue: "The Foresta Resort",
   location: "Mulshi, Pune",
@@ -72,10 +86,37 @@ export const celebrationDays = [
 ];
 
 export const storyMilestones = [
-  { year: "2023", title: "First Glance" },
-  { year: "2024 & 2025", title: "Adventures Together" },
-  { year: "2026", title: "The Proposal" },
-  { year: "2027", title: "Forever Begins" },
+  {
+    year: "2023", title: "First Glance", marathiLine: "पहिली नजर, पहिली ओळख.",
+    image: firstGlanceImage, imageAlt: "Vedangi and Siddhant smiling at each other on a lit-up city street at night",
+  },
+  {
+    year: "2024 & 2025", title: "Adventures Together", marathiLine: "नवीन वाटा, सोबतीचा प्रवास.",
+    image: adventuresImage, imageAlt: "Vedangi and Siddhant talking by a wrought-iron railing in a lush green garden",
+  },
+  {
+    year: "2026", title: "The Proposal", marathiLine: "एक प्रश्न, आयुष्यभराचा होकार.",
+    image: proposalImage, imageAlt: "Siddhant on one knee holding Vedangi's hand as she holds a bouquet by the river",
+  },
+  {
+    year: "2027", title: "Forever Begins", marathiLine: "दोन कुटुंबे, एक नवे नाते.",
+    image: familiesImage, imageAlt: "Vedangi and Siddhant standing together with both their families",
+  },
+];
+
+export const photos = {
+  hero: { src: heroRing, alt: "Vedangi's hand with her engagement ring resting in Siddhant's palm" },
+  countdown: { src: countdownImage, alt: "Vedangi and Siddhant by a stone balustrade above the river, city towers behind them" },
+  rsvp: { src: rsvpImage, alt: "Vedangi in a yellow saree and Siddhant in a rust shirt, smiling together" },
+};
+
+export const gallery = [
+  { src: bridgeImage, alt: "Vedangi with a bouquet and Siddhant on a red bridge over the river, skyscrapers behind" },
+  { src: embraceImage, alt: "Siddhant with his arm around Vedangi on a sunny city street" },
+  { src: boatAboveImage, alt: "Siddhant steering a pale blue boat while Vedangi relaxes with her bouquet, seen from above" },
+  { src: pointingImage, alt: "Siddhant pointing into the distance as Vedangi laughs beside him" },
+  { src: timesSquareImage, alt: "Vedangi and Siddhant walking arm in arm through glowing billboards at night" },
+  { src: boatImage, alt: "Siddhant at the wheel of a vintage boat with Vedangi beside him on the water" },
 ];
 
 export function getTimeLeft(now: Date) {

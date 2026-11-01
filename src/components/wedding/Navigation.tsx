@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Our Story", href: "#story" },
+  { label: "Moments", href: "#moments" },
   { label: "Details", href: "#details" },
   { label: "RSVP", href: "#rsvp" },
 ];
@@ -29,7 +30,7 @@ const Navigation = () => {
         className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
           isScrolled
             ? "bg-background/95 backdrop-blur-sm border-b border-border/50 py-4"
-            : "bg-transparent py-6"
+            : "bg-transparent pt-14 pb-4"
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
@@ -40,7 +41,7 @@ const Navigation = () => {
               isScrolled ? "text-foreground" : "text-white"
             }`}
           >
-            V & S
+            V <span className="text-haldi">❀</span> S
           </a>
 
           {/* Desktop Navigation */}
@@ -83,7 +84,7 @@ const Navigation = () => {
           className="fixed inset-0 z-50 bg-background"
         >
           <div className="container mx-auto px-6 py-6 flex items-center justify-between">
-            <span className="font-serif text-xl tracking-wide">V & S</span>
+            <span className="font-serif text-xl tracking-wide">V <span className="text-haldi">❀</span> S</span>
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="p-2 hover:opacity-70 transition-opacity"

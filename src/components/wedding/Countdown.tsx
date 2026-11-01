@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import { Heart } from "lucide-react";
-import { wedding, getTimeLeft } from "@/lib/wedding";
+import { wedding, getTimeLeft, photos } from "@/lib/wedding";
+import { LotusDivider } from "./Motifs";
 
 const Countdown = () => {
   const ref = useRef(null);
@@ -27,11 +28,12 @@ const Countdown = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&q=80"
-          alt="Romantic scenery"
-          className="w-full h-full object-cover"
+          src={photos.countdown.src}
+          alt={photos.countdown.alt}
+          loading="lazy"
+          className="w-full h-full object-cover object-[60%_40%]"
         />
-        <div className="absolute inset-0 bg-photograph-overlay/70" />
+        <div className="absolute inset-0 bg-photograph-overlay/75" />
       </div>
 
       <div className="relative z-10 container mx-auto px-6 text-center">
@@ -41,15 +43,16 @@ const Countdown = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
+          <p lang="mr" className="text-xl md:text-2xl text-haldi mb-3">शुभमुहूर्ताची प्रतीक्षा</p>
           <h2 className="font-serif text-3xl md:text-5xl text-on-photograph mb-4">
-            Counting down to wedding
+            Counting down to the wedding
           </h2>
           <motion.div
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             className="inline-block"
           >
-            <Heart className="w-6 h-6 text-rose mx-auto mb-8" fill="currentColor" />
+            <Heart className="w-6 h-6 text-haldi mx-auto mb-8" fill="currentColor" />
           </motion.div>
         </motion.div>
 
@@ -66,7 +69,7 @@ const Countdown = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="border-t border-on-photograph/30 py-5 md:py-8 min-w-0"
+              className="border-t border-zari/60 py-5 md:py-8 min-w-0"
             >
               <motion.span 
                 className="block font-serif text-3xl md:text-6xl text-on-photograph mb-2 tabular-nums"

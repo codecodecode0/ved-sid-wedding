@@ -2,6 +2,7 @@ import Navigation from "@/components/wedding/Navigation";
 import Hero from "@/components/wedding/Hero";
 import Marquee from "@/components/wedding/Marquee";
 import OurStory from "@/components/wedding/OurStory";
+import Gallery from "@/components/wedding/Gallery";
 
 import Countdown from "@/components/wedding/Countdown";
 import EventDetails from "@/components/wedding/EventDetails";
@@ -23,7 +24,10 @@ const Index = () => {
       <section id="story">
         <OurStory />
       </section>
-      
+
+      <section id="moments">
+        <Gallery />
+      </section>
       
       {/* Countdown Timer with Photo Background */}
       <Countdown />

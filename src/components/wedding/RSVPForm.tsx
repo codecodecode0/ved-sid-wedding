@@ -2,7 +2,8 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import rsvpPhoto from "@/assets/rsvp-photo.jpg";
+import { photos, wedding } from "@/lib/wedding";
+import { LotusDivider } from "./Motifs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
@@ -76,8 +77,9 @@ const RSVPForm = () => {
                 ease: "easeInOut"
               }}
             >
-              <Heart className="w-12 h-12 mx-auto mb-6 text-rose" />
+              <Heart className="w-12 h-12 mx-auto mb-6 text-haldi" />
             </motion.div>
+            <p lang="mr" className="text-2xl text-rose-foreground mb-2">धन्यवाद!</p>
             <h2 className="font-serif text-3xl md:text-4xl mb-4">
               Thank You
             </h2>
@@ -108,9 +110,10 @@ const RSVPForm = () => {
           <h2 className="heading-elegant font-serif text-4xl md:text-5xl lg:text-6xl">
             Kindly Respond
           </h2>
-          <div className="divider-editorial mt-8" />
-          <p className="text-muted-foreground mt-8 max-w-md mx-auto">
-            January 28–29, 2027 · The Foresta Resort
+          <p lang="mr" className="text-lg md:text-xl text-rose-foreground mt-3">आपली उपस्थिती प्रार्थनीय.</p>
+          <LotusDivider className="mt-7" />
+          <p className="text-muted-foreground mt-7 max-w-md mx-auto">
+            {wedding.dates} · {wedding.venue}
           </p>
         </motion.div>
 
@@ -125,24 +128,26 @@ const RSVPForm = () => {
           >
             <div className="relative">
               <img
-                src={rsvpPhoto}
-                alt="Wedding flowers"
-                className="w-full aspect-[3/4] object-cover"
+                src={photos.rsvp.src}
+                alt={photos.rsvp.alt}
+                loading="lazy"
+                className="w-full aspect-[3/4] object-cover object-top arch-frame"
               />
               {/* Decorative frame */}
-              <div className="absolute inset-0 border border-rose/30 m-6 pointer-events-none" />
+              <div className="absolute inset-0 border border-zari/70 m-5 arch-frame pointer-events-none" />
             </div>
             {/* Floating quote */}
             <motion.div 
-              className="absolute -bottom-8 -right-8 bg-background p-6 shadow-xl max-w-[250px]"
+              className="absolute -bottom-8 -right-8 bg-background p-6 shadow-xl max-w-[250px] border-t-4 border-haldi"
               initial={{ opacity: 0, y: 20 }}
               animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
             >
-              <p className="font-serif text-lg italic text-muted-foreground">
+              <p lang="mr" className="text-lg text-rose-foreground">आग्रहाचे निमंत्रण</p>
+              <p className="font-serif text-lg italic text-muted-foreground mt-1">
                 "Can't wait to celebrate with you!"
               </p>
-              <p className="text-sm tracking-wider uppercase mt-2 text-rose">— V & S</p>
+              <p className="text-sm tracking-wider uppercase mt-2 text-rose-foreground">— V & S</p>
             </motion.div>
           </motion.div>
 
@@ -329,7 +334,7 @@ const RSVPForm = () => {
                 >
                   <Button
                     type="submit"
-                    className="w-full bg-foreground text-background hover:bg-foreground/90 hover:shadow-lg hover:shadow-foreground/10 transition-all duration-300 py-6 text-sm tracking-[0.2em] uppercase"
+                    className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 py-6 text-sm tracking-[0.2em] uppercase"
                   >
                     Send Response
                   </Button>

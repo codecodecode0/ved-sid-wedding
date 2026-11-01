@@ -1,117 +1,77 @@
 import { motion } from "framer-motion";
-import { wedding } from "@/lib/wedding";
+import { photos, wedding } from "@/lib/wedding";
+import { LotusDivider, PaithaniBorder, Toran } from "./Motifs";
 
-const Hero = () => {
-  return (
-    <section className="relative min-h-[92svh] py-28 flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax Effect */}
-      <motion.div 
-        className="absolute inset-0"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-      >
-        <img
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80"
-          alt="Wedding celebration"
-          className="w-full h-full object-cover object-center"
-        />
-        {/* Elegant overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
-      </motion.div>
-      
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="space-y-8"
-        >
-          {/* Pre-title */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-sm tracking-[0.3em] uppercase text-white/80 font-sans"
-          >
+const fade = (delay: number) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { delay, duration: 0.9, ease: "easeOut" as const },
+});
+
+const Hero = () => (
+  <section className="relative rangoli-texture text-on-photograph overflow-hidden">
+    <div className="absolute top-0 inset-x-0 z-10">
+      <Toran />
+    </div>
+
+    <div className="container mx-auto px-6 pt-24 pb-16 md:pt-28 md:pb-20 min-h-[92svh] flex items-center">
+      <div className="grid lg:grid-cols-[1fr_minmax(0,26rem)] gap-12 lg:gap-20 items-center w-full max-w-6xl mx-auto">
+        <div className="text-center lg:text-left order-1">
+          <motion.p {...fade(0.2)} lang="mr" className="text-zari text-base md:text-lg">
+            ॥ श्री गणेशाय नमः ॥
+          </motion.p>
+
+          <motion.p {...fade(0.35)} lang="mr" className="mt-6 text-3xl md:text-4xl text-haldi">
+            शुभ विवाह
+          </motion.p>
+          <motion.p {...fade(0.45)} className="mt-3 text-xs md:text-sm tracking-[0.3em] uppercase text-on-photograph/70">
             Together with their families
           </motion.p>
 
-          {/* Names */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 1 }}
-            className="heading-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-serif text-white"
-          >
+          <motion.h1 {...fade(0.6)} className="heading-display font-serif mt-8 text-6xl sm:text-7xl md:text-8xl">
             <span className="block">Vedangi</span>
-            <span className="block text-3xl sm:text-4xl md:text-5xl font-normal italic text-white/70 my-4">
-              &
-            </span>
+            <span className="block text-3xl md:text-4xl italic text-zari my-3 md:my-4">&</span>
             <span className="block">Siddhant</span>
           </motion.h1>
 
-          {/* Divider with subtle shimmer */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="w-24 h-px bg-white/40 mx-auto my-12 relative overflow-hidden"
-          >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
-              animate={{ x: ["-100%", "100%"] }}
-              transition={{ 
-                duration: 3, 
-                repeat: Infinity, 
-                repeatDelay: 2,
-                ease: "easeInOut"
-              }}
-            />
-          </motion.div>
-
-          {/* Date */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 0.8 }}
-            className="space-y-2"
-          >
-            <p className="text-lg tracking-[0.2em] uppercase font-sans text-white/70">
-              January 28 & 29
-            </p>
-            <p className="font-serif text-2xl sm:text-3xl italic text-white">
-              2027
-            </p>
-          </motion.div>
-
-          {/* Location teaser */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2, duration: 0.8 }}
-            className="text-sm tracking-[0.15em] uppercase text-white/60 mt-8"
-          >
-            {wedding.venue} • {wedding.location}
+          <motion.p {...fade(0.75)} lang="mr" className="mt-5 text-xl md:text-2xl text-on-photograph/80">
+            {wedding.marathiNames.bride} <span className="text-zari">❀</span> {wedding.marathiNames.groom}
           </motion.p>
-        </motion.div>
 
-        {/* Scroll indicator */}
+          <motion.div {...fade(0.9)}>
+            <LotusDivider light className="my-8 lg:justify-start" />
+            <p className="text-base md:text-lg tracking-[0.2em] uppercase text-on-photograph/85">
+              {wedding.dates}
+            </p>
+            <p className="mt-3 text-xs md:text-sm tracking-[0.15em] uppercase text-on-photograph/60">
+              {wedding.venue} • {wedding.location}
+            </p>
+          </motion.div>
+        </div>
+
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, scale: 0.96 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 1.2, ease: "easeOut" }}
+          className="order-2 mx-auto w-full max-w-[19rem] sm:max-w-sm lg:max-w-none"
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            className="w-px h-16 bg-gradient-to-b from-transparent via-white/50 to-transparent"
-          />
+          <div className="relative p-2.5 arch-frame border border-zari/60">
+            <img
+              src={photos.hero.src}
+              alt={photos.hero.alt}
+              width={1067}
+              height={1600}
+              fetchPriority="high"
+              className="arch-frame w-full aspect-[3/4] object-cover object-[55%_60%]"
+            />
+            <div className="absolute inset-5 arch-frame border border-zari/40 pointer-events-none" />
+          </div>
         </motion.div>
       </div>
-    </section>
-  );
-};
+    </div>
+
+    <PaithaniBorder />
+  </section>
+);
 
 export default Hero;

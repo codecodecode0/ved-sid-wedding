@@ -57,6 +57,13 @@ export default {
           DEFAULT: "hsl(var(--blush))",
           foreground: "hsl(var(--blush-foreground))",
         },
+        maroon: {
+          DEFAULT: "hsl(var(--maroon))",
+          deep: "hsl(var(--maroon-deep))",
+        },
+        haldi: "hsl(var(--haldi))",
+        zari: "hsl(var(--zari))",
+        paithani: "hsl(var(--paithani))",
         rose: {
           DEFAULT: "hsl(var(--rose))",
           foreground: "hsl(var(--rose-foreground))",
