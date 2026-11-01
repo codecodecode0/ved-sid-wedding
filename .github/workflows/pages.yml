@@ -28,6 +28,10 @@ jobs:
       - run: npm ci
       # Pages serves the site from /<repo>/, so assets and the router need that base path
       - run: npm run build -- --base=/${{ github.event.repository.name }}/
+        env:
+          # Public Supabase settings, stored as repository variables (Settings → Secrets and variables → Actions → Variables)
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
       # Single-page app: send unknown paths back to the app instead of GitHub's 404 page
       - run: cp dist/index.html dist/404.html
       - uses: actions/upload-pages-artifact@v3

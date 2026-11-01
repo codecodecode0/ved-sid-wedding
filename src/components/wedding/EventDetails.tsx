@@ -3,6 +3,7 @@ import { MapPin, ArrowUpRight, Shirt } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { celebrationDays, wedding } from "@/lib/wedding";
 import { LotusDivider } from "./Motifs";
+import AddToCalendar from "./AddToCalendar";
 
 const EventDetails = () => (
   <section className="py-14 md:py-24">
@@ -17,6 +18,9 @@ const EventDetails = () => (
         <Button asChild variant="ghost" className="mt-3 gap-2">
           <a href={wedding.mapUrl} target="_blank" rel="noopener noreferrer"><MapPin className="h-4 w-4" />View location<ArrowUpRight className="h-4 w-4" /></a>
         </Button>
+        <div className="mt-4">
+          <AddToCalendar />
+        </div>
       </motion.div>
       <div className="max-w-6xl mx-auto space-y-12 md:space-y-16">
         {celebrationDays.map((day, index) => (

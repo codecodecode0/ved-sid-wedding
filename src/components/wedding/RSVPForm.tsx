@@ -19,11 +19,29 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Heart } from "lucide-react";
+import { Heart, Loader2 } from "lucide-react";
+import { saveRsvp } from "@/lib/supabase";
+import AddToCalendar from "./AddToCalendar";
+
+const countryCodes = [
+  { code: "+91", label: "🇮🇳 +91" },
+  { code: "+1", label: "🇺🇸 +1" },
+  { code: "+44", label: "🇬🇧 +44" },
+  { code: "+971", label: "🇦🇪 +971" },
+  { code: "+61", label: "🇦🇺 +61" },
+  { code: "+65", label: "🇸🇬 +65" },
+  { code: "+49", label: "🇩🇪 +49" },
+  { code: "+64", label: "🇳🇿 +64" },
+];
 
 const formSchema = z.object({
   name: z.string().min(2, "Please enter your full name"),
-  email: z.string().email("Please enter a valid email address"),
+  email: z.string().trim().email("Please enter a valid email address").or(z.literal("")),
+  phoneCode: z.string(),
+  phone: z
+    .string()
+    .trim()
+    .refine((v) => v === "" || /^[0-9][0-9 -]{4,18}[0-9]$/.test(v), "Please enter a valid phone number"),
   attendance: z.enum(["attending", "not-attending"], {
     required_error: "Please select your attendance",
   }),
@@ -38,20 +56,42 @@ const RSVPForm = () => {
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submittedAttending, setSubmittedAttending] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
+      phoneCode: "+91",
+      phone: "",
       guests: "",
       dietary: "",
       message: "",
     },
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("RSVP submitted:", data);
+  const onSubmit = async (data: FormData) => {
+    setSubmitError(null);
+    const attending = data.attendance === "attending";
+    try {
+      const digits = data.phone.replace(/[^0-9]/g, "");
+      await saveRsvp({
+        name: data.name.trim(),
+        email: data.email || null,
+        phone: digits ? `${data.phoneCode} ${digits}` : null,
+        attendance: data.attendance,
+        guests: attending && data.guests ? Math.min(10, Math.max(1, Number(data.guests))) : null,
+        dietary: attending && data.dietary?.trim() ? data.dietary.trim() : null,
+        message: data.message?.trim() || null,
+      });
+    } catch (error) {
+      console.error("RSVP could not be saved", error);
+      setSubmitError("Sorry, we couldn't save your response. Please check your connection and try again.");
+      return;
+    }
+    setSubmittedAttending(attending);
     setIsSubmitted(true);
   };
 
@@ -84,9 +124,16 @@ const RSVPForm = () => {
               Thank You
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              Your response has been received. We are so grateful you'll be part
-              of our special day. We can't wait to celebrate with you.
+              {submittedAttending
+                ? "Your response has been received. We are so grateful you'll be part of our special day. We can't wait to celebrate with you."
+                : "Your response has been received. We'll miss you, and we're grateful for your love and blessings."}
             </p>
+            {submittedAttending && (
+              <div className="mt-8">
+                <p className="text-sm text-muted-foreground mb-3">Save the dates so you don't miss a moment:</p>
+                <AddToCalendar />
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -187,7 +234,7 @@ const RSVPForm = () => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-sm tracking-wide uppercase">
-                        Email Address
+                        Email Address (Optional)
                       </FormLabel>
                       <FormControl>
                         <Input
@@ -197,6 +244,41 @@ const RSVPForm = () => {
                           {...field}
                         />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Phone with country code */}
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm tracking-wide uppercase">Phone Number (Optional)</FormLabel>
+                      <div className="flex gap-2">
+                        <select
+                          aria-label="Country code"
+                          {...form.register("phoneCode")}
+                          className="h-10 rounded-md border border-border/50 bg-background px-2 text-sm focus:border-rose/50 focus:outline-none"
+                        >
+                          {countryCodes.map((c) => (
+                            <option key={c.code} value={c.code}>
+                              {c.label}
+                            </option>
+                          ))}
+                        </select>
+                        <FormControl>
+                          <Input
+                            type="tel"
+                            inputMode="tel"
+                            autoComplete="tel-national"
+                            placeholder="98765 43210"
+                            className="bg-background border-border/50 focus:border-rose/50 transition-colors"
+                            {...field}
+                          />
+                        </FormControl>
+                      </div>
                       <FormMessage />
                     </FormItem>
                   )}
@@ -334,11 +416,23 @@ const RSVPForm = () => {
                 >
                   <Button
                     type="submit"
+                    disabled={form.formState.isSubmitting}
                     className="w-full bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 py-6 text-sm tracking-[0.2em] uppercase"
                   >
-                    Send Response
+                    {form.formState.isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" /> Sending…
+                      </>
+                    ) : (
+                      "Send Response"
+                    )}
                   </Button>
                 </motion.div>
+                {submitError && (
+                  <p role="alert" className="text-sm text-destructive text-center -mt-4">
+                    {submitError}
+                  </p>
+                )}
               </form>
             </Form>
           </motion.div>

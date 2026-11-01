@@ -26,6 +26,8 @@ export const wedding = {
   venue: "The Foresta Resort",
   location: "Mulshi, Pune",
   mapUrl: "https://share.google/DxVHqyg0djySK7CFR",
+  address: "The Foresta Resort, Mulshi, Pune, Maharashtra, India",
+  siteUrl: "https://codecodecode0.github.io/ved-sid-wedding/",
   ceremonyAt: "2027-01-29T10:00:00+05:30",
 };
 
@@ -35,21 +37,21 @@ export const celebrationDays = [
     label: "Thursday, January 28",
     events: [
       {
-        title: "Engagement", marathiTitle: "साखरपुडा", time: "10:00 AM",
+        title: "Engagement", marathiTitle: "साखरपुडा", time: "10:00 AM", durationMinutes: 120,
         quote: "साखरेच्या गोडव्याने, जुळले दोन मनांचे धागे.",
         description: "A sweet sakharpuda to start it all: rings exchanged, two families joined.",
         dressCode: "Ethnic elegance", attire: "Sarees, salwar suits or kurtas with thoughtful accessories for a graceful morning celebration.",
         image: engagementImage, imageAlt: "Gold engagement rings surrounded by jasmine and pink flowers",
       },
       {
-        title: "Haldi Carnival", marathiTitle: "हळदीचा सोहळा", time: "3:00 PM",
+        title: "Haldi Carnival", marathiTitle: "हळदीचा सोहळा", time: "3:00 PM", durationMinutes: 150,
         quote: "हळदीचा रंग, आनंदाची उधळण; हसत खेळत साजरा करू हा क्षण!",
         description: "An afternoon of turmeric, laughter and happy, playful chaos.",
         dressCode: "Pastel colours", attire: "Soft pastel sarees, kurtas or playful floral outfits in light fabrics, with comfortable flats; choose something you don’t mind getting a little haldi on.",
         image: haldiImage, imageAlt: "Brass bowl of turmeric paste with marigolds and yellow silk",
       },
       {
-        title: "Sangeet", marathiTitle: "संगीत संध्या", time: "7:00 PM",
+        title: "Sangeet", marathiTitle: "संगीत संध्या", time: "7:00 PM", durationMinutes: 240,
         quote: "सुरांची मैफल, नात्यांचा मेळ; आज रंगू दे आनंदाचा खेळ!",
         description: "Music, dance and both families on one stage. Bring your best moves.",
         dressCode: "Jewel tones & festive sparkle", attire: "Lehengas, festive sarees, bandhgalas or embellished kurtas; wear shoes made for dancing.",
@@ -62,21 +64,21 @@ export const celebrationDays = [
     label: "Friday, January 29",
     events: [
       {
-        title: "Saptapadi", marathiTitle: "सप्तपदी", time: "10:00 AM",
+        title: "Saptapadi", marathiTitle: "सप्तपदी", time: "10:00 AM", durationMinutes: 180,
         quote: "सात पावले, सात वचने; जन्मभर जपू प्रेमाचे नाते.",
         description: "Seven sacred steps, seven promises, and the moment we become one.",
         dressCode: "Traditional Maharashtrian", attire: "Paithani or nauvari sarees, silk sarees, or kurta-pyjamas with a traditional jacket; a pheta makes a lovely finishing touch.",
         image: saptapadiImage, imageAlt: "Sacred wedding fire with brass ritual vessels beneath a floral mandap",
       },
       {
-        title: "Baarat", marathiTitle: "वरात", time: "5:00 PM",
+        title: "Baarat", marathiTitle: "वरात", time: "5:00 PM", durationMinutes: 120,
         quote: "ढोलाच्या तालावर, आनंदाच्या गजरात; नाचत गात निघाली वरात!",
         description: "Dhol beats, dancing feet and a procession bursting with colour.",
         dressCode: "Colourful festive wear", attire: "Bright sarees, festive kurtas or Indo-western outfits; comfortable footwear for the procession, with an optional colourful pheta.",
         image: baaratImage, imageAlt: "Flower-decorated wedding car, dhol and saffron pheta on a petal-strewn Baarat procession path, without people",
       },
       {
-        title: "Reception", marathiTitle: "स्वागत समारंभ", time: "7:00 PM",
+        title: "Reception", marathiTitle: "स्वागत समारंभ", time: "7:00 PM", durationMinutes: 240,
         quote: "आपल्या आशीर्वादांची साथ, खुलो आमच्या संसाराची वाट.",
         description: "An evening of dinner, blessings and our first toast as a married couple.",
         dressCode: "Elegant evening formal", attire: "Silk sarees, elegant lehengas, suits or bandhgalas; rich colours and refined details for the evening.",
