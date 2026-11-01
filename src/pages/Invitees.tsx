@@ -2,6 +2,16 @@ import { useEffect, useMemo, useState, type FormEvent } from "react";
 import { Download, Loader2, LockKeyhole, RefreshCw, Search, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { deleteGuest, fetchGuestList, type Rsvp } from "@/lib/supabase";
 import { LotusDivider } from "@/components/wedding/Motifs";
 
@@ -127,6 +137,7 @@ const Invitees = () => {
   const [filter, setFilter] = useState<"all" | "attending" | "not-attending">("all");
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [deleting, setDeleting] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   const toggle = (id: string) =>
     setSelected((current) => {
@@ -138,8 +149,7 @@ const Invitees = () => {
 
   const removeSelected = async () => {
     const ids = [...selected];
-    const label = ids.length === 1 ? "this RSVP" : `these ${ids.length} RSVPs`;
-    if (!window.confirm(`Delete ${label}? This can't be undone.`)) return;
+    setConfirmOpen(false);
     setDeleting(true);
     setError(null);
     const deleted = new Set<string>();
@@ -269,12 +279,30 @@ const Invitees = () => {
                 Clear
               </button>
             </p>
-            <Button size="sm" variant="destructive" onClick={removeSelected} disabled={deleting} className="gap-2">
+            <Button size="sm" variant="destructive" onClick={() => setConfirmOpen(true)} disabled={deleting} className="gap-2">
               {deleting ? <Loader2 className="h-4 w-4 animate-spin" /> : <Trash2 className="h-4 w-4" />}
               Delete selected
             </Button>
           </div>
         )}
+        <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+          <AlertDialogContent className="max-w-[calc(100vw-2rem)] sm:max-w-md">
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                Delete {selected.size === 1 ? "this RSVP" : `these ${selected.size} RSVPs`}?
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                {(rows ?? []).filter((r) => selected.has(r.id)).map((r) => r.name).join(", ")}. This can't be undone.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={removeSelected} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                Delete
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
         {error && (
           <p role="alert" className="mt-3 text-sm text-destructive">
             {error}
