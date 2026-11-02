@@ -25,7 +25,8 @@ const Hero = () => (
             aria-hidden
             className="mx-auto lg:mx-0 flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full border border-zari/70 ring-1 ring-zari/20 ring-offset-4 ring-offset-transparent text-4xl md:text-5xl text-zari leading-none"
           >
-            ॐ
+            {/* The Devanagari font reserves deep space below the baseline, so the glyph's ink sits high; nudge it to the optical center */}
+            <span className="inline-block translate-y-[0.26em]">ॐ</span>
           </motion.div>
           <motion.p {...fade(0.2)} lang="mr" className="mt-5 text-zari text-base md:text-lg">
             ॥ श्री गणेशाय नमः ॥

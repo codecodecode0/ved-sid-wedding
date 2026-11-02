@@ -32,7 +32,7 @@ const EventDetails = () => (
             </div>
             <ul className="grid md:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-5 md:gap-y-12 items-stretch">
               {day.events.map((event) => (
-                <li key={event.title} className="min-w-0 flex flex-col rounded-md border border-zari/40 bg-card p-3 shadow-[0_8px_24px_-18px_hsl(var(--maroon-deep)/0.5)] md:rounded-none md:border-0 md:bg-transparent md:p-0 md:shadow-none">
+                <li key={event.title} className="min-w-0 flex flex-col rounded-md border border-zari/40 bg-card p-3 shadow-[0_8px_24px_-18px_hsl(var(--maroon-deep)/0.5)] md:p-4">
                   {/* Phones: small photo beside the title; wider screens: photo on top */}
                   <div className="grid grid-cols-[minmax(9.5rem,42%)_1fr] md:grid-cols-1 gap-4 md:gap-0 items-center">
                     <div className="relative">
@@ -44,17 +44,18 @@ const EventDetails = () => (
                       <h4 className="font-serif text-2xl md:text-3xl leading-tight mt-1 md:mt-0">{event.title}</h4>
                       <p lang="mr" className="text-base md:text-lg text-rose-foreground mt-1">{event.marathiTitle}</p>
                       <blockquote lang="mr" className="mt-2 md:my-5 text-sm md:text-base leading-snug md:leading-normal text-foreground/80">{event.quote}</blockquote>
-                      <p className="mt-2 md:mt-0 md:mb-6 text-sm leading-snug md:leading-7 text-muted-foreground">{event.description}</p>
+                      <p className="mt-2 md:mt-0 md:mb-5 text-sm leading-snug md:leading-7 text-muted-foreground">{event.description}</p>
                     </div>
                   </div>
                   <div className="pt-3 md:pt-0 flex flex-col flex-1">
-                    <div className="border-t border-zari/30 md:border-border mt-auto md:mt-0 pt-2.5 md:pt-4">
+                    <div className="border-t border-zari/30 mt-auto pt-2.5 md:pt-4">
                       <p className="text-sm">
                         <Shirt className="inline h-4 w-4 mr-1.5 -mt-0.5 text-muted-foreground" />
                         <span className="text-muted-foreground">Dress code: </span>
                         <span className="font-medium">{event.dressCode}</span>
                       </p>
-                      <p className="text-xs leading-5 text-muted-foreground mt-1.5">{event.attire}</p>
+                      {/* Three lines reserved on wider screens so dividers line up across a row */}
+                      <p className="text-xs leading-5 text-muted-foreground mt-1.5 md:min-h-[3.75rem]">{event.attire}</p>
                     </div>
                   </div>
                 </li>
