@@ -1,6 +1,6 @@
 /**
  * Writes public/wedding.ics from the shared schedule so the site serves it at
- * /wedding.ics. The RSVP invite email attaches this same file.
+ * /wedding.ics for the RSVP invite email to attach (the page itself offers Google Calendar only).
  */
 import { writeFileSync } from "node:fs";
 import { buildIcs } from "../src/lib/calendar";

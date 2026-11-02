@@ -10,7 +10,7 @@ import nodemailer from "npm:nodemailer@6.9.16";
 
 type Rsvp = { name: string; email: string | null; attendance: string; guests: number | null };
 
-const SITE_URL = Deno.env.get("SITE_URL") ?? "https://codecodecode0.github.io/ved-sid-wedding/";
+const SITE_URL = Deno.env.get("SITE_URL") ?? "https://vedsid.com/";
 const GMAIL_USER = Deno.env.get("GMAIL_USER") ?? "";
 const GMAIL_APP_PASSWORD = Deno.env.get("GMAIL_APP_PASSWORD") ?? "";
 const WEBHOOK_SECRET = Deno.env.get("INVITE_WEBHOOK_SECRET") ?? "";

@@ -30,7 +30,7 @@ const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}
 
 const escapeIcs = (text: string) => text.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/([,;])/g, "\\$1");
 
-/** An .ics file with every event, for Apple Calendar, Outlook and others. */
+/** An .ics file with every event; the build writes it to /wedding.ics for the RSVP invite email. */
 export function buildIcs() {
   const now = stamp(new Date());
   const lines = [
@@ -54,16 +54,6 @@ export function buildIcs() {
     "END:VCALENDAR",
   ];
   return lines.join("\r\n");
-}
-
-export function downloadIcs() {
-  const blob = new Blob([buildIcs()], { type: "text/calendar;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const link = Object.assign(document.createElement("a"), { href: url, download: "vedangi-siddhant-wedding.ics" });
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 /** Google Calendar only takes one event per link, so this adds the whole celebration with the schedule inside. */
