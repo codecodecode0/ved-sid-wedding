@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import Monogram from "./Monogram";
 
 const navLinks = [
   { label: "Our Story", href: "#story" },
@@ -34,14 +35,9 @@ const Navigation = () => {
         }`}
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
-          {/* Logo / Names */}
-          <a
-            href="#"
-            className={`font-serif text-xl tracking-wide hover:opacity-70 transition-opacity ${
-              isScrolled ? "text-foreground" : "text-white"
-            }`}
-          >
-            V <span className="text-haldi">❀</span> S
+          {/* Logo: the favicon monogram */}
+          <a href="#" aria-label="Back to top" className="hover:opacity-80 transition-opacity">
+            <Monogram className="h-10 w-10" />
           </a>
 
           {/* Desktop Navigation */}
@@ -84,7 +80,7 @@ const Navigation = () => {
           className="fixed inset-0 z-50 bg-background"
         >
           <div className="container mx-auto px-6 py-6 flex items-center justify-between">
-            <span className="font-serif text-xl tracking-wide">V <span className="text-haldi">❀</span> S</span>
+            <Monogram className="h-10 w-10" />
             <button
               onClick={() => setIsMobileMenuOpen(false)}
               className="p-2 hover:opacity-70 transition-opacity"

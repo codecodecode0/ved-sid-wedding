@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
 import { wedding } from "@/lib/wedding";
 import { LotusDivider, PaithaniBorder } from "./Motifs";
+import Monogram from "./Monogram";
 import Venue from "./Venue";
 
 const footerVariants = {
@@ -41,22 +41,7 @@ const Footer = () => {
           className="text-center"
         >
           <p lang="mr" className="text-2xl md:text-3xl text-haldi mb-6">शुभमंगल सावधान</p>
-          <div className="inline-flex items-center gap-4 mb-4">
-            <span className="font-serif text-4xl md:text-5xl">V</span>
-            <motion.div
-              animate={{ 
-                scale: [1, 1.15, 1],
-              }}
-              transition={{ 
-                duration: 1.5, 
-                repeat: Infinity, 
-                ease: "easeInOut"
-              }}
-            >
-              <Heart className="w-5 h-5 text-haldi" fill="currentColor" />
-            </motion.div>
-            <span className="font-serif text-4xl md:text-5xl">S</span>
-          </div>
+          <Monogram className="mx-auto mb-4 h-20 w-20 md:h-24 md:w-24" />
 
           <p lang="mr" className="text-lg text-on-photograph/80 mb-6">
             {wedding.marathiNames.bride} ❀ {wedding.marathiNames.groom}
