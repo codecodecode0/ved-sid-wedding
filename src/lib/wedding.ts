@@ -27,7 +27,7 @@ export const wedding = {
   location: "Mulshi, Pune",
   mapUrl: "https://share.google/DxVHqyg0djySK7CFR",
   address: "The Foresta Resort, Mulshi, Pune, Maharashtra, India",
-  siteUrl: "https://codecodecode0.github.io/ved-sid-wedding/",
+  siteUrl: "https://vedsid.com/",
   ceremonyAt: "2027-01-29T09:00:00+05:30",
 };
 

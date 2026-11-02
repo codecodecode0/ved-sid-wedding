@@ -14,7 +14,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      {/* BASE_URL is "/" locally and "/ved-sid-wedding/" on GitHub Pages */}
+      {/* BASE_URL is "/" both locally and on vedsid.com */}
       <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<Index />} />

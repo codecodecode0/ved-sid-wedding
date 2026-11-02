@@ -1,6 +1,6 @@
 # Builds the site and publishes it to GitHub Pages at
-# https://codecodecode0.github.io/ved-sid-wedding/
-name: Deploy preview to GitHub Pages
+# https://vedsid.com (custom domain; public/CNAME names it)
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -26,8 +26,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      # Pages serves the site from /<repo>/, so assets and the router need that base path
-      - run: npm run build -- --base=/${{ github.event.repository.name }}/
+      - run: npm run build
         env:
           # Public Supabase settings, stored as repository variables (Settings → Secrets and variables → Actions → Variables)
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
