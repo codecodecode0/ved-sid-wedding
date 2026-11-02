@@ -15,6 +15,8 @@ describe("calendar", () => {
     expect(ics.match(/BEGIN:VEVENT/g)).toHaveLength(6);
     expect(ics).toContain("DTSTART:20270128T033000Z");
     expect(ics.split("\r\n")[0]).toBe("BEGIN:VCALENDAR");
+    // Reminders a month, a week and a day before the first event
+    expect(ics.match(/TRIGGER:[^\r]+/g)).toEqual(["TRIGGER:-P30D", "TRIGGER:-P7D", "TRIGGER:-P1D"]);
   });
 
   it("links Google Calendar to the whole celebration", () => {

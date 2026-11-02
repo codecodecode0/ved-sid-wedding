@@ -55,16 +55,6 @@ const Footer = () => {
           >
             {wedding.dates}
           </motion.p>
-
-          <motion.p 
-            className="mt-6 text-sm text-on-photograph/60"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            Made with love for our forever
-          </motion.p>
         </motion.div>
       </div>
     </footer>

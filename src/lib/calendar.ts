@@ -30,7 +30,21 @@ const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}
 
 const escapeIcs = (text: string) => text.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/([,;])/g, "\\$1");
 
-/** An .ics file with every event; the build writes it to /wedding.ics for the RSVP invite email. */
+const reminders = [
+  { trigger: "-P30D", label: "in one month" },
+  { trigger: "-P7D", label: "in one week" },
+  { trigger: "-P1D", label: "tomorrow" },
+];
+
+const alarm = ({ trigger, label }: (typeof reminders)[number]) => [
+  "BEGIN:VALARM",
+  "ACTION:DISPLAY",
+  `TRIGGER:${trigger}`,
+  `DESCRIPTION:${escapeIcs(`${wedding.names}'s wedding celebrations begin ${label}`)}`,
+  "END:VALARM",
+];
+
+/** An .ics file with every event;the build writes it to /wedding.ics for the RSVP invite email. */
 export function buildIcs() {
   const now = stamp(new Date());
   const lines = [
@@ -49,6 +63,8 @@ export function buildIcs() {
       `DESCRIPTION:${escapeIcs(event.description)}`,
       `LOCATION:${escapeIcs(wedding.address)}`,
       `URL:${wedding.siteUrl}`,
+      // Reminders 1 month, 1 week and 1 day ahead, on the first event only so guests get three alerts, not eighteen
+      ...(i === 0 ? reminders.flatMap(alarm) : []),
       "END:VEVENT",
     ]),
     "END:VCALENDAR",
