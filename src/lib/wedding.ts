@@ -37,7 +37,7 @@ export const celebrationDays = [
     label: "Thursday, January 28",
     events: [
       {
-        title: "Engagement", marathiTitle: "साखरपुडा", time: "10:00 AM", durationMinutes: 120,
+        title: "Engagement", marathiTitle: "साखरपुडा", time: "9:00 AM", durationMinutes: 120,
         quote: "साखरेच्या गोडव्याने, जुळले दोन मनांचे धागे.",
         description: "A sweet sakharpuda to start it all: rings exchanged, two families joined.",
         dressCode: "Ethnic elegance", attire: "Sarees, salwar suits or kurtas with thoughtful accessories for a graceful morning celebration.",

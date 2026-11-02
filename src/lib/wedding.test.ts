@@ -17,7 +17,7 @@ describe("wedding dates and milestones", () => {
 
 describe("celebration times", () => {
   it.each([
-    [0, "Engagement", "10:00 AM"],
+    [0, "Engagement", "9:00 AM"],
     [0, "Haldi Carnival", "2:00 PM"],
     [0, "Sangeet", "7:00 PM"],
     [1, "Saptapadi", "9:00 AM"],

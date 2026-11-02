@@ -25,7 +25,7 @@ export const calendarEvents: CalendarEvent[] = celebrationDays.flatMap((day) =>
   }),
 );
 
-/** 2027-01-28T04:30:00.000Z → 20270128T043000Z */
+/** 2027-01-28T03:30:00.000Z → 20270128T033000Z */
 const stamp = (d: Date) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 
 const escapeIcs = (text: string) => text.replace(/\\/g, "\\\\").replace(/\n/g, "\\n").replace(/([,;])/g, "\\$1");
