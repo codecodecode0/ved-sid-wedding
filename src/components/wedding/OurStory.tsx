@@ -5,6 +5,9 @@ import { LotusDivider } from "./Motifs";
 type Milestone = (typeof storyMilestones)[number];
 type Moment = Milestone["moments"][number];
 
+/** Photos that matter most to the couple print larger within their chapter's collage. */
+const isFeatured = (moment: Moment) => "featured" in moment && moment.featured;
+
 const reveal = (delay = 0) => ({
   initial: { opacity: 0, y: 30 },
   whileInView: { opacity: 1, y: 0 },
@@ -55,6 +58,20 @@ const Collage = ({ milestone, flip }: { milestone: Milestone; flip: boolean }) =
     </div>
   );
 
+  // Featured prints: a large pair overlapping a smaller main photo, so the chapter stays the same height.
+  if (moments.some(isFeatured)) {
+    return (
+      <div className="relative">
+        <div className="w-[60%] mx-auto">{main}</div>
+        <div className="relative -mt-2 sm:-mt-6 grid grid-cols-2 gap-3 sm:gap-4">
+          {moments.map((moment, i) => (
+            <Polaroid key={moment.note} moment={moment} tilt={i === 0 ? -3 : 3} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   // Three moments: postcard prints overlapping the bottom of the main photo.
   if (moments.length === 3) {
     // Compact chapters keep one row of three; others give phones two large prints with the third centred below.
@@ -93,7 +110,7 @@ const Collage = ({ milestone, flip }: { milestone: Milestone; flip: boolean }) =
           key={moment.note}
           moment={moment}
           tilt={(i === 0 ? 5 : -4) * (flip ? -1 : 1)}
-          className={`absolute ${side} w-[40%] ${i === 0 ? (moments.length === 1 ? "bottom-0" : "top-[6%]") : "bottom-0"} z-10`}
+          className={`absolute ${side} ${moments.length === 1 ? "w-[40%] bottom-0" : `w-[34%] ${i === 0 ? "top-0" : "bottom-0"}`} z-10`}
         />
       ))}
     </div>

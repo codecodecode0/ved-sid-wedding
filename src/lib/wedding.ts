@@ -123,6 +123,7 @@ export const storyMilestones = [
     image: firstGlanceImage, imageAlt: "Vedangi and Siddhant smiling at each other on a lit-up city street at night",
     moments: [
       { src: timesSquareImage, alt: "Vedangi and Siddhant walking arm in arm through glowing billboards at night", note: "Where it all began", place: "New York" },
+      { src: boatAboveImage, alt: "Vedangi and Siddhant in a pale blue boat on the river, seen from above", note: "Just the two of us" },
     ],
   },
   {
@@ -131,9 +132,8 @@ export const storyMilestones = [
     image: adventuresImage, imageAlt: "Vedangi and Siddhant talking by a wrought-iron railing in a lush green garden",
     compact: true,
     moments: [
-      { src: graduationImage, alt: "Vedangi in a light blue graduation gown with flowers beside Siddhant holding a 2024 balloon", note: "Graduation day" },
-      { src: sunnyLawnImage, alt: "Vedangi and Siddhant, in a shirt and tie, standing close on a sunny green lawn under a blue sky", note: "All dressed up" },
-      { src: boatAboveImage, alt: "Vedangi and Siddhant in a pale blue boat on the river, seen from above", note: "Just the two of us" },
+      { src: graduationImage, alt: "Vedangi in a light blue graduation gown with flowers beside Siddhant holding a 2024 balloon", note: "Graduation day", featured: true },
+      { src: sunnyLawnImage, alt: "Vedangi and Siddhant, in a shirt and tie, standing close on a sunny green lawn under a blue sky", note: "All dressed up", featured: true },
     ],
   },
   {
