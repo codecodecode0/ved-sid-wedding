@@ -31,7 +31,7 @@ export const wedding = {
   ceremonyAt: "2027-01-29T09:00:00+05:30",
 };
 
-export type OutfitTone = "rose" | "haldi" | "plum" | "sand" | "maroon";
+export type OutfitTone = "rose" | "haldi" | "plum" | "sand" | "emerald";
 export type OutfitSwatch = { name: string; hex: string };
 
 export type CelebrationEvent = {
@@ -46,7 +46,7 @@ export type CelebrationEvent = {
 const eveningOutfit = {
   dressCode: "Elegant evening formal",
   attire: "Silk sarees, elegant lehengas, suits or bandhgalas; rich colours and refined details for the evening.",
-  outfitTone: "maroon",
+  outfitTone: "emerald",
 } satisfies Partial<CelebrationEvent>;
 
 export const celebrationDays: { date: string; label: string; events: CelebrationEvent[] }[] = [

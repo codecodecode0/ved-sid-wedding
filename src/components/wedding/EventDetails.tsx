@@ -10,12 +10,12 @@ const outfitTones: Record<OutfitTone, string> = {
   haldi: "bg-[#FBEBC6] text-foreground",
   plum: "bg-gradient-to-r from-[#4A2458] to-[#6B4478] text-white",
   sand: "bg-[#F5E6CC] text-foreground",
-  maroon: "bg-gradient-to-r from-[#5F1A2A] to-[#7D2A3D] text-white",
+  emerald: "bg-gradient-to-r from-[#0F3D33] to-[#1E5C4C] text-white",
 };
 
 /** Dress code in the event's theme colours, with the suggested palette as swatches. */
 const OutfitPanel = ({ event }: { event: CelebrationEvent }) => {
-  const onDark = event.outfitTone === "plum" || event.outfitTone === "maroon";
+  const onDark = event.outfitTone === "plum" || event.outfitTone === "emerald";
   return (
     <div className={`mt-auto rounded-md px-3.5 py-3 md:min-h-[14.25rem] lg:min-h-[10.5rem] xl:min-h-[9rem] ${outfitTones[event.outfitTone]}`}>
       <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 min-h-6">

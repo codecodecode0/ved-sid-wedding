@@ -24,9 +24,6 @@ const Index = () => {
         <OurStory />
       </section>
 
-      {/* Countdown Timer with Photo Background */}
-      <Countdown />
-      
       {/* Event Details with Venue Photos */}
       <section id="details">
         <EventDetails />
@@ -36,6 +33,9 @@ const Index = () => {
       <section id="rsvp">
         <RSVPForm />
       </section>
+      
+      {/* Countdown Timer with Photo Background */}
+      <Countdown />
       
       {/* Footer */}
       <Footer />
