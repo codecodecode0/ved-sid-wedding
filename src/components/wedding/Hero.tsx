@@ -31,6 +31,9 @@ const Hero = () => (
           <motion.p {...fade(0.2)} lang="mr" className="mt-5 text-zari text-base md:text-lg">
             ॥ श्री गणेशाय नमः ॥
           </motion.p>
+          <motion.p {...fade(0.25)} lang="mr" className="mt-1 text-zari text-base md:text-lg">
+            ॥ जय जय रघुवीर समर्थ ॥
+          </motion.p>
 
           <motion.p {...fade(0.35)} lang="mr" className="mt-6 text-3xl md:text-4xl text-haldi">
             शुभ विवाह
