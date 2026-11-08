@@ -18,12 +18,12 @@ const Hero = () => (
 
     <div className="container mx-auto px-6 pt-24 pb-12 md:pt-28 md:pb-16 min-h-[88svh] flex items-center">
       <div className="grid lg:grid-cols-[1fr_minmax(0,26rem)] gap-12 lg:gap-20 items-center w-full max-w-6xl mx-auto">
-        <div className="text-center lg:text-left order-1">
+        <div className="text-center order-1">
           <motion.div
             {...fade(0.1)}
             lang="mr"
             aria-hidden
-            className="mx-auto lg:mx-0 flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full border border-zari/70 ring-1 ring-zari/20 ring-offset-4 ring-offset-transparent text-4xl md:text-5xl text-zari leading-none"
+            className="mx-auto flex h-20 w-20 md:h-24 md:w-24 items-center justify-center rounded-full border border-zari/70 ring-1 ring-zari/20 ring-offset-4 ring-offset-transparent text-4xl md:text-5xl text-zari leading-none"
           >
             {/* The Devanagari font reserves deep space below the baseline, so the glyph's ink sits high; nudge it to the optical center */}
             <span className="inline-block translate-y-[0.26em]">ॐ</span>
@@ -53,7 +53,7 @@ const Hero = () => (
           </motion.p>
 
           <motion.div {...fade(0.9)}>
-            <LotusDivider light className="my-8 lg:justify-start" />
+            <LotusDivider light className="my-8" />
             <p className="text-base md:text-lg tracking-[0.2em] uppercase text-on-photograph/85">
               {wedding.dates}
             </p>
