@@ -54,7 +54,7 @@ export const celebrationDays: { date: string; label: string; events: Celebration
     label: "Thursday, January 28",
     events: [
       {
-        title: "Engagement", marathiTitle: "साखरपुडा", time: "9:00 AM", durationMinutes: 120,
+        title: "Engagement", marathiTitle: "साखरपुडा", time: "10:00 AM", durationMinutes: 120,
         quote: "साखरेच्या गोडव्याने, जुळले दोन मनांचे धागे.",
         description: "A sweet sakharpuda to start it all: rings exchanged, two families joined.",
         dressCode: "Ethnic elegance", attire: "Sarees, salwar suits or kurtas with thoughtful accessories for a graceful morning celebration.", outfitTone: "rose",
@@ -98,14 +98,14 @@ export const celebrationDays: { date: string; label: string; events: Celebration
         image: saptapadiImage, imageAlt: "Sacred wedding fire with brass ritual vessels beneath a floral mandap",
       },
       {
-        title: "Baarat", marathiTitle: "वरात", time: "5:00 PM", durationMinutes: 120,
+        title: "Baarat", marathiTitle: "वरात", time: "4:00 PM", durationMinutes: 120,
         quote: "ढोलाच्या तालावर, आनंदाच्या गजरात; नाचत गात निघाली वरात!",
         description: "Dhol beats, dancing feet and a procession bursting with colour.",
         ...eveningOutfit,
         image: baaratImage, imageAlt: "Flower-decorated wedding car, dhol and saffron pheta on a petal-strewn Baarat procession path, without people",
       },
       {
-        title: "Reception", marathiTitle: "स्वागत समारंभ", time: "7:00 PM", durationMinutes: 240,
+        title: "Reception", marathiTitle: "स्वागत समारंभ", time: "6:00 PM", durationMinutes: 240,
         quote: "आपल्या आशीर्वादांची साथ, खुलो आमच्या संसाराची वाट.",
         description: "An evening of dinner, blessings and our first toast as a married couple.",
         ...eveningOutfit,

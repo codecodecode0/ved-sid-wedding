@@ -5,7 +5,7 @@ const IST_OFFSET = "+05:30";
 
 type CalendarEvent = { title: string; start: Date; end: Date; description: string };
 
-/** "7:00 PM" on "2027-01-28" → the matching instant in Asia/Kolkata. */
+/** "6:00 PM" on "2027-01-29" → the matching instant in Asia/Kolkata. */
 function toInstant(date: string, time: string) {
   const [, hh, mm, meridiem] = time.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i) ?? [];
   let hours = Number(hh) % 12;
