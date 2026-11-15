@@ -65,10 +65,10 @@ export const celebrationDays: { date: string; label: string; events: Celebration
         title: "Haldi Carnival", marathiTitle: "हळदीचा सोहळा", time: "2:00 PM", durationMinutes: 150,
         quote: "हळदीचा रंग, आनंदाची उधळण; हसत खेळत साजरा करू हा क्षण!",
         description: "An afternoon of turmeric, laughter and happy, playful chaos.",
-        dressCode: "Pastel colours", attire: "Soft pastel sarees, kurtas or playful floral outfits in light fabrics, with comfortable flats; choose something you don’t mind getting a little haldi on.", outfitTone: "haldi",
+        dressCode: "Pastel yellows & oranges", attire: "Soft yellow, peach or orange pastel sarees, kurtas or playful floral outfits in light fabrics, with comfortable flats; choose something you don’t mind getting a little haldi on.", outfitTone: "haldi",
         swatches: [
-          { name: "Butter yellow", hex: "#FBE27A" }, { name: "Peach", hex: "#F9C272" }, { name: "Blush pink", hex: "#F9C2D2" },
-          { name: "Lavender", hex: "#D6BCE8" }, { name: "Mint", hex: "#BFE3C3" },
+          { name: "Lemon", hex: "#FFF1A8" }, { name: "Butter yellow", hex: "#FBE27A" }, { name: "Apricot", hex: "#FCD29F" },
+          { name: "Peach", hex: "#F9C272" }, { name: "Pastel orange", hex: "#F7B07C" },
         ],
         image: haldiImage, imageAlt: "Brass bowl of turmeric paste with marigolds and yellow silk",
       },
