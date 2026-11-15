@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
+import { AnimatePresence, motion, useInView, useReducedMotion, type PanInfo } from "framer-motion";
 import { photos } from "@/lib/wedding";
 
 const SLIDE_MS = 2000;
+/** How far (px) or how fast (px/s) a swipe or mouse drag must go to change photo. */
+const SWIPE_DISTANCE = 50;
+const SWIPE_SPEED = 400;
 
 const slides = photos.carousel;
 
@@ -10,21 +13,31 @@ const slides = photos.carousel;
  * Our photos cross-fading inside the arch frame, one after another.
  * Only the visible photo and the next one are loaded, so phones don't fetch every picture up front.
  * It waits on the first photo until the arch is scrolled into view, and pauses again when it leaves.
+ * Guests can also swipe it with a finger or drag it with the mouse: left for the next photo, right for the previous one.
  */
 const PhotoCarousel = () => {
   const [index, setIndex] = useState(0);
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: 0.5 });
+  const [dragging, setDragging] = useState(false);
 
-  // Each photo gets a full turn, including one picked from the dots; nothing advances off screen or while the tab is in the background.
+  const step = (by: number) => setIndex((i) => (i + by + slides.length) % slides.length);
+  const onDragEnd = (_: unknown, { offset, velocity }: PanInfo) => {
+    setDragging(false);
+    if (offset.x < -SWIPE_DISTANCE || velocity.x < -SWIPE_SPEED) step(1);
+    else if (offset.x > SWIPE_DISTANCE || velocity.x > SWIPE_SPEED) step(-1);
+  };
+
+  // Each photo gets a full turn, including one picked from the dots or a swipe; nothing advances
+  // mid-drag, off screen, or while the tab is in the background.
   useEffect(() => {
-    if (!inView) return;
+    if (!inView || dragging) return;
     let timer: number | undefined;
     const schedule = () => {
       window.clearTimeout(timer);
       // People who prefer less motion still see every photo, just changing more slowly and without the fade.
-      timer = window.setTimeout(() => setIndex((i) => (i + 1) % slides.length), reduceMotion ? SLIDE_MS * 2 : SLIDE_MS);
+      timer = window.setTimeout(() => step(1), reduceMotion ? SLIDE_MS * 2 : SLIDE_MS);
     };
     const onVisibility = () => (document.hidden ? window.clearTimeout(timer) : schedule());
     schedule();
@@ -33,7 +46,7 @@ const PhotoCarousel = () => {
       window.clearTimeout(timer);
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, [index, inView, reduceMotion]);
+  }, [index, inView, dragging, reduceMotion]);
 
   // Warm the cache for the next photo so the fade never shows a half-loaded image.
   useEffect(() => {
@@ -46,7 +59,16 @@ const PhotoCarousel = () => {
   return (
     <div ref={ref} aria-roledescription="carousel" aria-label="Our photos">
       <div className="relative p-2.5 arch-frame border border-zari/60">
-        <div className="relative arch-frame overflow-hidden aspect-[3/4] bg-maroon-deep">
+        <motion.div
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.25}
+          onDragStart={() => setDragging(true)}
+          onDragEnd={onDragEnd}
+          // Vertical swipes still scroll the page on phones.
+          style={{ touchAction: "pan-y" }}
+          className="relative arch-frame overflow-hidden aspect-[3/4] bg-maroon-deep cursor-grab active:cursor-grabbing select-none"
+        >
           <AnimatePresence initial={false}>
             <motion.img
               key={slide.src}
@@ -57,10 +79,11 @@ const PhotoCarousel = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: reduceMotion ? 0 : 0.7, ease: "easeOut" }}
               style={{ objectPosition: slide.position ?? "50% 40%" }}
-              className="absolute inset-0 h-full w-full object-cover"
+              draggable={false}
+              className="absolute inset-0 h-full w-full object-cover pointer-events-none"
             />
           </AnimatePresence>
-        </div>
+        </motion.div>
         <div className="absolute inset-5 arch-frame border border-zari/40 pointer-events-none" />
       </div>
 

@@ -9,7 +9,7 @@ import firstGlanceImage from "@/private/assets/photos/story-first-glance.jpg";
 import adventuresImage from "@/private/assets/photos/story-adventures.jpg";
 import proposalImage from "@/private/assets/photos/story-proposal.jpg";
 import familiesImage from "@/private/assets/photos/story-families.jpg";
-import countdownImage from "@/private/assets/photos/countdown-chicago.jpg";
+import countdownImage from "@/private/assets/photos/countdown-proposal-meadow.jpg";
 import rsvpImage from "@/private/assets/photos/rsvp-couple.jpg";
 import boatAboveImage from "@/private/assets/photos/gallery-boat-above.jpg";
 import timesSquareImage from "@/private/assets/photos/gallery-times-square.jpg";
@@ -157,7 +157,7 @@ export const storyMilestones = [
 
 export const photos = {
   hero: { src: heroRing, alt: "Vedangi's hand with her engagement ring resting in Siddhant's palm" },
-  countdown: { src: countdownImage, alt: "Vedangi and Siddhant by a stone balustrade above the river, city towers behind them" },
+  countdown: { src: countdownImage, alt: "Siddhant proposing to Vedangi in a wide meadow between tall evergreens, the sound stretching out behind them", position: "49% 50%" },
   rsvp: { src: rsvpImage, alt: "Vedangi in a yellow saree and Siddhant in a rust shirt, smiling together" },
 };
 
