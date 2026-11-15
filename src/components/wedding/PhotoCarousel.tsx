@@ -9,7 +9,7 @@ const slides = photos.carousel;
 /**
  * Our photos cross-fading inside the arch frame, one after another.
  * Only the visible photo and the next one are loaded, so phones don't fetch every picture up front.
- * It waits on the ring photo until the arch is scrolled into view, and pauses again when it leaves.
+ * It waits on the first photo until the arch is scrolled into view, and pauses again when it leaves.
  */
 const PhotoCarousel = () => {
   const [index, setIndex] = useState(0);

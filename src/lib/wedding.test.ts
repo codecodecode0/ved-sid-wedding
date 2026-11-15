@@ -10,9 +10,8 @@ describe("wedding dates and photos", () => {
     expect(getTimeLeft(new Date("2027-01-28T03:30:00Z"))).toEqual({ days: 1, hours: 0, minutes: 0, seconds: 0 });
     expect(getTimeLeft(new Date("2027-01-30T03:30:00Z"))).toEqual({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   });
-  it("opens the photo carousel on the ring picture, ends on Siddhant pointing ahead, and describes every photo", () => {
-    expect(photos.carousel[0].alt).toMatch(/engagement ring/);
-    expect(photos.carousel.at(-1)?.alt).toMatch(/pointing into the distance/);
+  it("closes the photo carousel on the ring picture and describes every photo", () => {
+    expect(photos.carousel.at(-1)?.alt).toMatch(/engagement ring resting/);
     expect(photos.carousel.every(photo => photo.src && photo.alt)).toBe(true);
   });
 });

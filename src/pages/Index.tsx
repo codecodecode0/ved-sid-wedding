@@ -25,13 +25,13 @@ const Index = () => {
         <EventDetails />
       </section>
       
+      {/* Countdown Timer with Photo Background */}
+      <Countdown />
+      
       {/* RSVP Form with Decorative Photo */}
       <section id="rsvp">
         <RSVPForm />
       </section>
-      
-      {/* Countdown Timer with Photo Background */}
-      <Countdown />
       
       {/* Footer */}
       <Footer />

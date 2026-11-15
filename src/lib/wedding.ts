@@ -12,7 +12,6 @@ import countdownImage from "@/assets/photos/countdown-chicago.jpg";
 import rsvpImage from "@/assets/photos/rsvp-invitation.jpg";
 import boatAboveImage from "@/assets/photos/gallery-boat-above.jpg";
 import boatWaveImage from "@/assets/photos/gallery-boat-wave.jpg";
-import timesSquareImage from "@/assets/photos/gallery-times-square.jpg";
 import graduationImage from "@/assets/photos/story-graduation.jpg";
 import sunnyLawnImage from "@/assets/photos/story-sunny-lawn.jpg";
 import embraceImage from "@/assets/photos/gallery-embrace.jpg";
@@ -117,12 +116,10 @@ export const celebrationDays: { date: string; label: string; events: Celebration
 ];
 
 export const photos = {
-  /** Shown one after another inside the arch in the hero, always in this order: the ring first, the rest mixed up, Siddhant pointing into the distance last. */
+  /** Shown one after another inside the arch in the hero, always in this order: opening on the proposal and closing on the ring. */
   carousel: [
-    { src: heroRing, alt: "Vedangi's hand with her engagement ring resting in Siddhant's palm", position: "55% 60%" },
     { src: proposalImage, alt: "Siddhant on one knee holding Vedangi's hand as she holds a bouquet by the river" },
     { src: adventuresImage, alt: "Vedangi and Siddhant talking by a wrought-iron railing in a lush green garden" },
-    { src: timesSquareImage, alt: "Vedangi and Siddhant walking arm in arm through glowing billboards at night" },
     { src: graduationImage, alt: "Vedangi in a light blue graduation gown with flowers beside Siddhant holding a 2024 balloon" },
     { src: boatAboveImage, alt: "Vedangi and Siddhant in a pale blue boat on the river, seen from above" },
     { src: boatWaveImage, alt: "Vedangi and Siddhant smiling and waving from a pale blue boat on green water" },
@@ -131,6 +128,7 @@ export const photos = {
     { src: sunnyLawnImage, alt: "Vedangi and Siddhant, in a shirt and tie, standing close on a sunny green lawn under a blue sky" },
     { src: ringImage, alt: "Vedangi and Siddhant embracing on a green lawn, her engagement ring on her hand against his chest" },
     { src: pointingImage, alt: "Siddhant pointing into the distance as Vedangi laughs beside him" },
+    { src: heroRing, alt: "Vedangi's hand with her engagement ring resting in Siddhant's palm", position: "55% 60%" },
   ] as { src: string; alt: string; position?: string }[],
   countdown: { src: countdownImage, alt: "Vedangi and Siddhant by a stone balustrade above the river, city towers behind them" },
   rsvp: { src: rsvpImage, alt: "Vedangi in a yellow floral saree and Siddhant in a rust shirt, smiling together against a white wall" },
