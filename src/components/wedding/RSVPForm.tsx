@@ -80,7 +80,7 @@ const RSVPForm = () => {
       await saveRsvp({
         name: data.name.trim(),
         email: data.email || null,
-        phone: digits ? `${data.phoneCode} ${digits}` : null,
+        phone: digits ? `${data.phoneCode} ${digits}`: null,
         attendance: data.attendance,
         guests: attending && data.guests ? Math.min(10, Math.max(1, Number(data.guests))) : null,
         dietary: attending && data.dietary?.trim() ? data.dietary.trim() : null,
@@ -99,7 +99,7 @@ const RSVPForm = () => {
 
   if (isSubmitted) {
     return (
-      <section className="py-24 md:py-32">
+      <section className="py-24">
         <div className="container mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -120,7 +120,7 @@ const RSVPForm = () => {
               <Heart className="w-12 h-12 mx-auto mb-6 text-haldi" />
             </motion.div>
             <p lang="mr" className="text-2xl text-rose-foreground mb-2">धन्यवाद!</p>
-            <h2 className="font-serif text-3xl md:text-4xl mb-4">
+            <h2 className="font-serif text-3xl mb-4">
               Thank You
             </h2>
             <p className="text-muted-foreground leading-relaxed">
@@ -141,7 +141,7 @@ const RSVPForm = () => {
   }
 
   return (
-    <section className="py-14 md:py-24 bg-card overflow-hidden">
+    <section className="py-14 bg-card overflow-hidden">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <motion.div
@@ -149,15 +149,15 @@ const RSVPForm = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-10 md:mb-14"
+          className="text-center mb-10"
         >
           <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">
             We Hope You Can Join Us
           </p>
-          <h2 className="heading-elegant font-serif text-4xl md:text-5xl lg:text-6xl">
+          <h2 className="heading-elegant font-serif text-4xl">
             Kindly Respond
           </h2>
-          <p lang="mr" className="text-lg md:text-xl text-rose-foreground mt-3">आपली उपस्थिती प्रार्थनीय.</p>
+          <p lang="mr" className="text-lg text-rose-foreground mt-3">आपली उपस्थिती प्रार्थनीय.</p>
           <LotusDivider className="mt-7" />
           <p className="text-muted-foreground mt-7 max-w-md mx-auto">
             {wedding.dates} · {wedding.venue}
@@ -165,13 +165,13 @@ const RSVPForm = () => {
         </motion.div>
 
         {/* Two Column Layout */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 max-w-6xl mx-auto items-center">
+        <div className="grid gap-12 max-w-6xl mx-auto items-center">
           {/* Decorative Image */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={isHeaderInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative w-full max-w-[19rem] sm:max-w-sm lg:max-w-none mx-auto mb-10 lg:mb-0"
+            className="relative w-full max-w-[19rem] mx-auto mb-10"
           >
             <div className="relative">
               <img
@@ -185,7 +185,7 @@ const RSVPForm = () => {
             </div>
             {/* Floating quote */}
             <motion.div 
-              className="absolute -bottom-8 -right-3 sm:-right-8 bg-background p-4 sm:p-6 shadow-xl max-w-[210px] sm:max-w-[250px] border-t-4 border-haldi"
+              className="absolute -bottom-8 -right-3 bg-background p-4 shadow-xl max-w-[210px] border-t-4 border-haldi"
               initial={{ opacity: 0, y: 20 }}
               animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}

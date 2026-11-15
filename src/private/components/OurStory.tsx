@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { storyMilestones } from "@/lib/wedding";
+import { storyMilestones } from "@/private/lib/wedding";
 import { LotusDivider } from "./Motifs";
 
 type Milestone = (typeof storyMilestones)[number];

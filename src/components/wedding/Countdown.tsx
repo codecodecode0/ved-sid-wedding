@@ -24,7 +24,7 @@ const Countdown = () => {
   ];
 
   return (
-    <section ref={ref} className="relative py-16 md:py-28 overflow-hidden">
+    <section ref={ref} className="relative py-16 overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -43,8 +43,8 @@ const Countdown = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <p lang="mr" className="text-xl md:text-2xl text-haldi mb-3">शुभमुहूर्ताची प्रतीक्षा</p>
-          <h2 className="font-serif text-3xl md:text-5xl text-on-photograph mb-4">
+          <p lang="mr" className="text-xl text-haldi mb-3">शुभमुहूर्ताची प्रतीक्षा</p>
+          <h2 className="font-serif text-3xl text-on-photograph mb-4">
             Counting down to the wedding
           </h2>
           <motion.div
@@ -61,7 +61,7 @@ const Countdown = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid grid-cols-4 max-w-2xl mx-auto gap-2 md:gap-6"
+          className="grid grid-cols-4 max-w-2xl mx-auto gap-2"
         >
           {timeBlocks.map((block, index) => (
             <motion.div
@@ -69,10 +69,10 @@ const Countdown = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-              className="border-t border-zari/60 py-5 md:py-8 min-w-0"
+              className="border-t border-zari/60 py-5 min-w-0"
             >
               <motion.span 
-                className="block font-serif text-3xl md:text-6xl text-on-photograph mb-2 tabular-nums"
+                className="block font-serif text-3xl text-on-photograph mb-2 tabular-nums"
                 key={block.value}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -80,7 +80,7 @@ const Countdown = () => {
               >
                 {String(block.value).padStart(2, "0")}
               </motion.span>
-              <span className="text-[10px] md:text-xs uppercase text-on-photograph/70">
+              <span className="text-[10px] uppercase text-on-photograph/70">
                 {block.label}
               </span>
             </motion.div>
@@ -92,7 +92,7 @@ const Countdown = () => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="font-serif text-lg md:text-2xl italic text-on-photograph/80 mt-6 md:mt-10"
+          className="font-serif text-lg italic text-on-photograph/80 mt-6"
         >
           {wedding.dates} • {wedding.location}
         </motion.p>

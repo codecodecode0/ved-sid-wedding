@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { celebrationDays, getTimeLeft, storyMilestones, wedding } from "./wedding";
+import { celebrationDays, getTimeLeft, photos, wedding } from "./wedding";
 
-describe("wedding dates and milestones", () => {
+describe("wedding dates and photos", () => {
   it("holds celebrations on January 28 and 29, 2027", () => {
     expect(celebrationDays.map(day => day.date)).toEqual(["2027-01-28", "2027-01-29"]);
   });
@@ -10,8 +10,10 @@ describe("wedding dates and milestones", () => {
     expect(getTimeLeft(new Date("2027-01-28T03:30:00Z"))).toEqual({ days: 1, hours: 0, minutes: 0, seconds: 0 });
     expect(getTimeLeft(new Date("2027-01-30T03:30:00Z"))).toEqual({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   });
-  it("preserves the supplied story milestone years", () => {
-    expect(storyMilestones.map(event => event.year)).toEqual(["2023", "2024 & 2025", "2026", "2027"]);
+  it("opens the photo carousel on the ring picture, ends on Siddhant pointing ahead, and describes every photo", () => {
+    expect(photos.carousel[0].alt).toMatch(/engagement ring/);
+    expect(photos.carousel.at(-1)?.alt).toMatch(/pointing into the distance/);
+    expect(photos.carousel.every(photo => photo.src && photo.alt)).toBe(true);
   });
 });
 

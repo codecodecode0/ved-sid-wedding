@@ -8,10 +8,10 @@ import heroRing from "@/assets/photos/hero-ring.jpg";
 import firstGlanceImage from "@/assets/photos/story-first-glance.jpg";
 import adventuresImage from "@/assets/photos/story-adventures.jpg";
 import proposalImage from "@/assets/photos/story-proposal.jpg";
-import familiesImage from "@/assets/photos/story-families.jpg";
 import countdownImage from "@/assets/photos/countdown-chicago.jpg";
-import rsvpImage from "@/assets/photos/rsvp-couple.jpg";
+import rsvpImage from "@/assets/photos/rsvp-invitation.jpg";
 import boatAboveImage from "@/assets/photos/gallery-boat-above.jpg";
+import boatWaveImage from "@/assets/photos/gallery-boat-wave.jpg";
 import timesSquareImage from "@/assets/photos/gallery-times-square.jpg";
 import graduationImage from "@/assets/photos/story-graduation.jpg";
 import sunnyLawnImage from "@/assets/photos/story-sunny-lawn.jpg";
@@ -116,49 +116,24 @@ export const celebrationDays: { date: string; label: string; events: Celebration
   },
 ];
 
-export const storyMilestones = [
-  {
-    year: "2023", chapter: "Chapter one", title: "First Glance", marathiLine: "पहिली नजर, पहिली ओळख.",
-    caption: "Bright lights, a busy street, and the start of us.",
-    image: firstGlanceImage, imageAlt: "Vedangi and Siddhant smiling at each other on a lit-up city street at night",
-    moments: [
-      { src: timesSquareImage, alt: "Vedangi and Siddhant walking arm in arm through glowing billboards at night", note: "Where it all began", place: "New York" },
-      { src: boatAboveImage, alt: "Vedangi and Siddhant in a pale blue boat on the river, seen from above", note: "Just the two of us" },
-    ],
-  },
-  {
-    year: "2024 & 2025", chapter: "Chapter two", title: "Adventures Together", marathiLine: "नवीन वाटा, सोबतीचा प्रवास.",
-    caption: "Graduations, new cities and days out on the water; every road was better together.",
-    image: adventuresImage, imageAlt: "Vedangi and Siddhant talking by a wrought-iron railing in a lush green garden",
-    compact: true,
-    moments: [
-      { src: graduationImage, alt: "Vedangi in a light blue graduation gown with flowers beside Siddhant holding a 2024 balloon", note: "Graduation day", featured: true },
-      { src: sunnyLawnImage, alt: "Vedangi and Siddhant, in a shirt and tie, standing close on a sunny green lawn under a blue sky", note: "All dressed up", featured: true },
-    ],
-  },
-  {
-    year: "2026", chapter: "Chapter three", title: "The Proposal", marathiLine: "एक प्रश्न, आयुष्यभराचा होकार.",
-    caption: "One knee by the river, a bouquet in her hands, and the easiest yes of our lives.",
-    image: proposalImage, imageAlt: "Siddhant on one knee holding Vedangi's hand as she holds a bouquet by the river",
-    compact: true,
-    moments: [
-      { src: ringImage, alt: "Vedangi and Siddhant embracing on a green lawn, her engagement ring on her hand against his chest", note: "With this ring" },
-      { src: embraceImage, alt: "Siddhant with his arm around Vedangi on a sunny city street", note: "Can't stop smiling" },
-      { src: pointingImage, alt: "Siddhant pointing into the distance as Vedangi laughs beside him", note: "Towards forever" },
-    ],
-  },
-  {
-    year: "2027", chapter: "Chapter four", title: "Forever Begins", marathiLine: "दोन कुटुंबे, एक नवे नाते.",
-    caption: "Two families, one celebration, and you are invited.",
-    image: familiesImage, imageAlt: "Vedangi and Siddhant standing together with both their families",
-    moments: [],
-  },
-];
-
 export const photos = {
-  hero: { src: heroRing, alt: "Vedangi's hand with her engagement ring resting in Siddhant's palm" },
+  /** Shown one after another inside the arch in the hero, always in this order: the ring first, the rest mixed up, Siddhant pointing into the distance last. */
+  carousel: [
+    { src: heroRing, alt: "Vedangi's hand with her engagement ring resting in Siddhant's palm", position: "55% 60%" },
+    { src: proposalImage, alt: "Siddhant on one knee holding Vedangi's hand as she holds a bouquet by the river" },
+    { src: adventuresImage, alt: "Vedangi and Siddhant talking by a wrought-iron railing in a lush green garden" },
+    { src: timesSquareImage, alt: "Vedangi and Siddhant walking arm in arm through glowing billboards at night" },
+    { src: graduationImage, alt: "Vedangi in a light blue graduation gown with flowers beside Siddhant holding a 2024 balloon" },
+    { src: boatAboveImage, alt: "Vedangi and Siddhant in a pale blue boat on the river, seen from above" },
+    { src: boatWaveImage, alt: "Vedangi and Siddhant smiling and waving from a pale blue boat on green water" },
+    { src: embraceImage, alt: "Siddhant with his arm around Vedangi on a sunny city street" },
+    { src: firstGlanceImage, alt: "Vedangi and Siddhant smiling at each other on a lit-up city street at night" },
+    { src: sunnyLawnImage, alt: "Vedangi and Siddhant, in a shirt and tie, standing close on a sunny green lawn under a blue sky" },
+    { src: ringImage, alt: "Vedangi and Siddhant embracing on a green lawn, her engagement ring on her hand against his chest" },
+    { src: pointingImage, alt: "Siddhant pointing into the distance as Vedangi laughs beside him" },
+  ] as { src: string; alt: string; position?: string }[],
   countdown: { src: countdownImage, alt: "Vedangi and Siddhant by a stone balustrade above the river, city towers behind them" },
-  rsvp: { src: rsvpImage, alt: "Vedangi in a yellow saree and Siddhant in a rust shirt, smiling together" },
+  rsvp: { src: rsvpImage, alt: "Vedangi in a yellow floral saree and Siddhant in a rust shirt, smiling together against a white wall" },
 };
 
 export function getTimeLeft(now: Date) {

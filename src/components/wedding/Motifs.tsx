@@ -39,14 +39,14 @@ export const LotusDivider = ({ className = "", light = false }: { className?: st
   const line = light ? "hsl(var(--zari) / 0.7)" : "hsl(var(--haldi))";
   return (
     <div aria-hidden className={`flex items-center justify-center gap-3 ${className}`}>
-      <span className="h-px w-12 md:w-16" style={{ background: `linear-gradient(90deg, transparent, ${line})` }} />
+      <span className="h-px w-12" style={{ background: `linear-gradient(90deg, transparent, ${line})`}} />
       <svg viewBox="0 0 40 24" className="h-5 w-8">
         <path d="M20 2 C 25 8, 25 16, 20 22 C 15 16, 15 8, 20 2 Z" fill="hsl(var(--haldi))" />
         <path d="M20 22 C 12 20, 7 14, 6 8 C 13 10, 18 15, 20 22 Z" fill={light ? "hsl(var(--zari))" : "hsl(var(--rose-foreground))"} />
         <path d="M20 22 C 28 20, 33 14, 34 8 C 27 10, 22 15, 20 22 Z" fill={light ? "hsl(var(--zari))" : "hsl(var(--rose-foreground))"} />
         <path d="M4 22 H36" stroke={line} strokeWidth="1" />
       </svg>
-      <span className="h-px w-12 md:w-16" style={{ background: `linear-gradient(270deg, transparent, ${line})` }} />
+      <span className="h-px w-12" style={{ background: `linear-gradient(270deg, transparent, ${line})`}} />
     </div>
   );
 };

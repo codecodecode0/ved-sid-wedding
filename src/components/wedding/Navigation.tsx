@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Monogram from "./Monogram";
+import { PAGE_WIDTH } from "./layout";
 
 const navLinks = [
-  { label: "Our Story", href: "#story" },
   { label: "Details", href: "#details" },
   { label: "RSVP", href: "#rsvp" },
   { label: "Venue", href: "#venue" },
@@ -28,7 +28,7 @@ const Navigation = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 1 }}
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+        className={`fixed top-0 inset-x-0 mx-auto ${PAGE_WIDTH} z-40 transition-all duration-500 ${
           isScrolled
             ? "bg-background/95 backdrop-blur-sm border-b border-border/50 py-4"
             : "bg-transparent pt-14 pb-4"
@@ -40,28 +40,11 @@ const Navigation = () => {
             <Monogram className="h-10 w-10" />
           </a>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className={`text-sm tracking-[0.15em] uppercase transition-colors link-underline ${
-                    isScrolled 
-                      ? "text-muted-foreground hover:text-foreground" 
-                      : "text-white/80 hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
 
-          {/* Mobile Menu Button */}
+          {/* Menu button */}
           <button
             onClick={() => setIsMobileMenuOpen(true)}
-            className={`md:hidden p-2 hover:opacity-70 transition-opacity ${
+            className={`p-2 hover:opacity-70 transition-opacity ${
               isScrolled ? "text-foreground" : "text-white"
             }`}
             aria-label="Open menu"
@@ -71,13 +54,13 @@ const Navigation = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Menu */}
       {isMobileMenuOpen && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 bg-background"
+          className={`fixed inset-y-0 inset-x-0 mx-auto ${PAGE_WIDTH} z-50 bg-background`}
         >
           <div className="container mx-auto px-6 py-6 flex items-center justify-between">
             <Monogram className="h-10 w-10" />

@@ -37,7 +37,7 @@ const Venue = () => (
   >
     <SahyadriLineArt />
     <p className="mt-6 text-xs tracking-[0.3em] uppercase text-on-photograph/60">The venue</p>
-    <p className="font-serif text-3xl md:text-4xl mt-2">{wedding.venue}</p>
+    <p className="font-serif text-3xl mt-2">{wedding.venue}</p>
     <p className="text-sm tracking-[0.2em] uppercase text-on-photograph/70 mt-2">{wedding.location}</p>
     <p lang="mr" className="text-lg text-haldi mt-3">सह्याद्रीच्या कुशीत, आनंदाचा सोहळा.</p>
     <a

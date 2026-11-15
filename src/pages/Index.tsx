@@ -1,16 +1,17 @@
 import Navigation from "@/components/wedding/Navigation";
 import Hero from "@/components/wedding/Hero";
 import Marquee from "@/components/wedding/Marquee";
-import OurStory from "@/components/wedding/OurStory";
 
 import Countdown from "@/components/wedding/Countdown";
 import EventDetails from "@/components/wedding/EventDetails";
 import RSVPForm from "@/components/wedding/RSVPForm";
 import Footer from "@/components/wedding/Footer";
+import { PAGE_WIDTH } from "@/components/wedding/layout";
 
 const Index = () => {
   return (
-    <main className="min-h-screen">
+    <div className="rangoli-texture min-h-screen">
+    <main className={`relative mx-auto ${PAGE_WIDTH} min-h-screen bg-background shadow-[0_0_60px_-10px_hsl(var(--maroon-deep)/0.9)]`}>
       <Navigation />
       
       {/* Hero Section with Background Photo */}
@@ -19,11 +20,6 @@ const Index = () => {
       {/* Marquee */}
       <Marquee />
       
-      {/* Our Story with Timeline Photos */}
-      <section id="story">
-        <OurStory />
-      </section>
-
       {/* Event Details with Venue Photos */}
       <section id="details">
         <EventDetails />
@@ -40,6 +36,7 @@ const Index = () => {
       {/* Footer */}
       <Footer />
     </main>
+    </div>
   );
 };
 
