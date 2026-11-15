@@ -31,7 +31,8 @@ const Countdown = () => {
           src={photos.countdown.src}
           alt={photos.countdown.alt}
           loading="lazy"
-          className="w-full h-full object-cover object-[60%_40%]"
+          style={{ objectPosition: photos.countdown.position }}
+          className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-photograph-overlay/75" />
       </div>
