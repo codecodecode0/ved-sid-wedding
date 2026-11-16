@@ -22,6 +22,7 @@ import {
 import { Heart, Loader2 } from "lucide-react";
 import { saveRsvp } from "@/lib/supabase";
 import AddToCalendar from "./AddToCalendar";
+import LetterScroll from "./LetterScroll";
 
 const countryCodes = [
   { code: "+91", label: "🇮🇳 +91" },
@@ -57,6 +58,9 @@ const RSVPForm = () => {
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-100px" });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submittedAttending, setSubmittedAttending] = useState(false);
+  // True once the response is saved: the letter rolls up, is sealed and flies off before the thank-you shows.
+  const [sealed, setSealed] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
   const form = useForm<FormData>({
@@ -92,7 +96,14 @@ const RSVPForm = () => {
       return;
     }
     setSubmittedAttending(attending);
-    setIsSubmitted(true);
+    // Bring the top of the letter to the upper third of the screen (clear of the menu bar),
+    // where it rolls up, gets its seal and is sent.
+    const section = sectionRef.current;
+    if (section) {
+      const top = section.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.3;
+      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    }
+    setSealed(true);
   };
 
   const attendance = form.watch("attendance");
@@ -141,9 +152,10 @@ const RSVPForm = () => {
   }
 
   return (
-    <section className="py-14 bg-card overflow-hidden">
+    <section ref={sectionRef} className="py-14 bg-card overflow-hidden">
       <div className="container mx-auto px-6">
-        {/* Section Header */}
+        {/* The whole response card is a letter on a scroll: it unrolls as guests arrive and is rolled up and sent on submit */}
+        <LetterScroll sealed={sealed} onSent={() => setIsSubmitted(true)}>
         <motion.div
           ref={headerRef}
           initial={{ opacity: 0, y: 30 }}
@@ -151,7 +163,7 @@ const RSVPForm = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-10"
         >
-          <p className="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">
+          <p className="text-xs tracking-[0.25em] uppercase text-muted-foreground mb-4">
             We Hope You Can Join Us
           </p>
           <h2 className="heading-elegant font-serif text-4xl">
@@ -437,6 +449,7 @@ const RSVPForm = () => {
             </Form>
           </motion.div>
         </div>
+        </LetterScroll>
       </div>
     </section>
   );
