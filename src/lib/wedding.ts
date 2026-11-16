@@ -66,8 +66,8 @@ export const celebrationDays: { date: string; label: string; events: Celebration
         description: "An afternoon of turmeric, laughter and happy, playful chaos.",
         dressCode: "Light pastel yellows", attire: "Light pastel yellow, lemon or cream sarees, kurtas or floral outfits in airy fabrics, with comfortable flats. Please keep to light shades only, nothing dark or bright, and choose something you don’t mind getting a little haldi on.", outfitTone: "haldi",
         swatches: [
-          { name: "Cream", hex: "#FFF4D2" }, { name: "Lemon", hex: "#FFF1A8" }, { name: "Butter yellow", hex: "#FCE8A0" },
-          { name: "Light orange", hex: "#FFDDB8" }, { name: "Light pink", hex: "#FCDDE3" },
+          { name: "Cream", hex: "#FFF8E6" }, { name: "Lemon", hex: "#FFF6C8" }, { name: "Butter yellow", hex: "#FFF0C2" },
+          { name: "Light orange", hex: "#FFE6BF" },
         ],
         image: haldiImage, imageAlt: "Brass bowl of turmeric paste with marigolds and yellow silk",
       },
