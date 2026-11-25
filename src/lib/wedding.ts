@@ -37,7 +37,7 @@ export type CelebrationEvent = {
   title: string; marathiTitle: string; time: string; durationMinutes: number;
   quote: string;
   description: string;
-  dressCode: string; attire: string; outfitTone: OutfitTone; swatches?: OutfitSwatch[];
+  dressCode: string; attire: string; attireNote?: string; outfitTone: OutfitTone; swatches?: OutfitSwatch[];
   image: string; imageAlt: string;
 };
 
@@ -54,7 +54,7 @@ export const celebrationDays: { date: string; label: string; events: Celebration
     label: "Thursday, January 28",
     events: [
       {
-        title: "Engagement", marathiTitle: "साखरपुडा", time: "10:00 AM", durationMinutes: 120,
+        title: "Engagement", marathiTitle: "साखरपुडा", time: "9:00 AM", durationMinutes: 120,
         quote: "साखरेच्या गोडव्याने, जुळले दोन मनांचे धागे.",
         description: "A sweet sakharpuda to start it all: rings exchanged, two families joined.",
         dressCode: "Ethnic elegance", attire: "Sarees, salwar suits or kurtas with thoughtful accessories for a graceful morning celebration.", outfitTone: "rose",
@@ -64,7 +64,7 @@ export const celebrationDays: { date: string; label: string; events: Celebration
         title: "Haldi Carnival", marathiTitle: "हळदीचा सोहळा", time: "2:00 PM", durationMinutes: 150,
         quote: "हळदीचा रंग, आनंदाची उधळण; हसत खेळत साजरा करू हा क्षण!",
         description: "An afternoon of turmeric, laughter and happy, playful chaos.",
-        dressCode: "Light pastel yellows", attire: "Light pastel yellow, lemon or cream sarees, kurtas or floral outfits in airy fabrics, with comfortable flats. Please keep to light shades only, nothing dark or bright, and choose something you don’t mind getting a little haldi on.", outfitTone: "haldi",
+        dressCode: "Light pastel yellows", attire: "Light pastel yellow, lemon or cream sarees, kurtas or floral outfits in airy fabrics, with comfortable flats. Please keep to light shades only, nothing dark or bright, and choose something you don’t mind getting a little haldi on.", attireNote: "Light shades only, nothing dark or bright", outfitTone: "haldi",
         swatches: [
           { name: "Cream", hex: "#FFF8E6" }, { name: "Lemon", hex: "#FFF6C8" }, { name: "Butter yellow", hex: "#FFF0C2" },
           { name: "Light orange", hex: "#FFE6BF" },
